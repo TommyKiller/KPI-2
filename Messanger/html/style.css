@@ -1,0 +1,214 @@
+*{
+    box-sizing: border-box;
+}
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, ul, li{
+                 
+    margin: 0;
+    padding:0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+
+body {
+    font-family: Verdana, Arial, sans-serif;    
+    background-color:white;
+}
+#header{ 
+   
+	margin-top:70px;
+	
+}
+#header h1 {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 50px 50px 50px 50px;
+    clear: both;
+	text-align:center;
+	
+}
+#nav {
+    background-color: #eee;
+    /*border-bottom: 2px solid #ccc;*/
+	border-bottom: 2px solid #66CC00;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	
+}
+#nav ul{
+	text-align:center;
+	
+}
+#nav li {
+    display: inline; 
+    list-style: none;  	
+}
+#nav a {
+    display:inline-block;
+    color: black;
+    padding: 25px 25px 25px;
+    text-decoration: none;
+	/*
+    border-right: 2px solid #ccc;
+	border-left: 2px solid #ccc;
+	*/
+	border-right: 2px solid #66CC00;
+	border-left: 2px solid #66CC00;
+}
+#nav a:hover {
+    color:white;
+	background-color:black;
+	
+}
+#nav:after {
+    content: " ";
+    display: table;
+    clear: both;
+}
+.wrapper{
+    background-color: #eee;
+	border: 2px solid #66CC00;
+	border-radius:20px;
+	
+}
+#menu h2{
+	font-size: 18px;
+    font-weight: bold;
+    padding: 10px 10px 10px 10px;
+	border-bottom:2px solid #66CC00;
+	text-align:center;
+}
+#menu {
+	float:right;
+	margin:20px;
+	padding:10px;
+	border: 2px solid #66CC00;
+	border-radius:10px;
+	background-color:#CCFF66;
+	width:300px;
+
+}
+#menu li{
+	list-style:none;
+	margin:10px;
+	text-align:center;
+	
+}
+#menu a{
+	
+	text-decoration:none;
+	color:#666666;
+	padding:4px;
+	
+}
+
+#menu a:hover{
+	
+	color:white;
+	border-radius:5px;
+	background-color:#66CC00;
+	padding-left:60px;
+	padding-right:60px;
+}
+/*якась хуйня з лініями вони то товсті то тонкі через одну */
+.line{ 	
+	border-bottom:2px solid #66CC00;
+	width:170px;
+	margin:auto; 
+	
+}
+
+#registr{
+	margin:20px;
+	padding: 10px;
+	margin-right:343px;
+	border: 2px solid #66CC00;
+	border-radius:10px;
+	background-color:#CCFF66;
+}
+#video video{
+	width:500px;
+}
+#video{
+	margin:10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	
+}
+#registr h1{
+	font-size:18px;
+	text-align:center;
+	margin-bottom:10px;
+	margin-top:10px;
+}
+#form{
+	padding-top:10px;
+	text-align:center;
+}
+#form table{
+	margin:15px;
+	display: flex;
+	align-items: center;
+	justify-content: center;	
+}
+#form input{
+	margin:5px;
+	padding:5px;
+	border: 2px solid #66CC00;
+}
+#form label{
+	padding:5px;
+}
+#form label:hover{
+	border: 2px solid #66CC00;
+	border-radius:10px;
+	color:white;
+	background-color:#66CC00;
+}
+
+#form #butOK{
+	margin:0px;
+	width:120px;
+	height:40px;
+	font-weight:bold;
+	border: 2px solid #66CC00;
+}
+#butOK:hover{
+	color:white;
+	background-color:#66CC00;
+}
+#forgive{
+	font-size:12px;
+}
+/*
+#registr:after{
+	
+    clear:both;
+    display:table;
+    content:'';
+}
+*/
+
+#text p{
+	margin-right:100px;
+	padding:10px 30px 10px 30px;
+	line-height:130%;
+}
+
+#footer{ 
+   
+    font-size: .8em;    
+    text-align: center;
+    padding: 10px 10px 30px 10px;
+	
+}
+#nav ul, #header h1, .wrapper, #footer p {
+    max-width: 1200px;
+    margin: 0 auto; 
+}
+.wrapper, #nav, #header, #footer{
+    min-width: 968px;
+}
