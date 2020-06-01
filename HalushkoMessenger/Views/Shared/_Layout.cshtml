@@ -8,19 +8,7 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <div id="nav">
-        <ul>
-            <li>
-                <a asp-area="" asp-controller="Account" asp-action="Register">Register</a>
-            </li>
-            <li>
-                <a asp-area="" asp-controller="Account" asp-action="Login">Login</a>
-            </li>
-            <li>
-                <a asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
-            </li>
-        </ul>
-    </div>
+    @Html.Partial("_NavBar")
     <div id="header">
         <h1>MyMessenger - Спілкуйся Спілкуйся Спілкуйся</h1>
     </div>
@@ -48,10 +36,10 @@
             </ul>
         </div>
 
-        
-            <div id="renderBody">
-                @RenderBody()
-            </div>
+
+        <div id="renderBody">
+            @RenderBody()
+        </div>
 
         <article id="main">
             <div id="text">
