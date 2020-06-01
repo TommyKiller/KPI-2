@@ -69,24 +69,45 @@ namespace HalushkoMessenger.Controllers
 
         ////
         //// GET: /Accont/Login
-        //[HttpGet]
-        //[AllowAnonymous]
-        //public ActionResult Login(string returnUrl)
-        //{
-        //    ViewBag.ReturnUrl = returnUrl;
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Login(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
 
-        //    return View();
-        //}
+            return View();
+        }
 
         ////
         //// POST: /Accont/Login
-        //[HttpPost]
-        //[AllowAnonymous]
-        //public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
-        //{
-        //    if (model.)
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ActionResult> Login(LoginUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Mapper mapper = new Mapper(new MapperConfiguration(cfg => cfg.CreateMap<LoginUserViewModel, User>()));
 
-        //    return View();
-        //}
+                User user = mapper.Map<LoginUserViewModel, User>(model);
+
+                var result = await _userManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    await _signInManager.SignInAsync(user, true);
+
+                    return RedirectToAction("Dialogs", "Home");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(error.Code, error.Description);
+                    }
+                }
+            }
+
+            return View(model);
+        }
     }
 }
