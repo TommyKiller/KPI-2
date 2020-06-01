@@ -67,16 +67,16 @@ namespace HalushkoMessenger.Controllers
             return View(model);
         }
 
-        ////
-        //// GET: /Accont/Login
-        //[HttpGet]
-        //[AllowAnonymous]
-        //public ActionResult Login(string returnUrl)
-        //{
-        //    ViewBag.ReturnUrl = returnUrl;
 
-        //    return View();
-        //}
+        //GET: /Accont/Login
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Login(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+
+            return View();
+        }
 
         ////
         //// POST: /Accont/Login
