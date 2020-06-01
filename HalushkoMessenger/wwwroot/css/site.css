@@ -134,7 +134,9 @@ body {
             color: white;
             background-color: #66CC00;
         }
-
+#home {
+    font-weight:bold;
+}
 #nav {
     background-color: #eee;
     border-bottom: 2px solid #66CC00;
