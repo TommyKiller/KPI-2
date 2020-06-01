@@ -404,3 +404,13 @@ hr {
 #renderBody {
     min-width: 500px;
 }
+.validation-summary-errors li{
+    list-style:none;
+    font-size:90%;
+}
+.validation-summary-errors  {
+    border: 1px solid red;
+    border-radius:10px;
+    width:400px;
+    padding:5px;
+}
