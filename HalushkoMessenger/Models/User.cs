@@ -13,7 +13,7 @@ namespace HalushkoMessenger.Models
     public class User : IdentityUser
     {
         [Key]
-        [StringLength(100)]
+        [StringLength(255)]
         public string Login { get; set; }
     }
 }

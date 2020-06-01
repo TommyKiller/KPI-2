@@ -59,7 +59,7 @@ namespace HalushkoMessenger
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Dialogs}/{id?}");
             });
         }
     }

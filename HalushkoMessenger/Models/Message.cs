@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HalushkoMessenger.Models
 {
-    public class Messege
+    public class Message
     {
         public int Id { get; set; }
 
@@ -19,9 +19,11 @@ namespace HalushkoMessenger.Models
         public string RecipientId { get; set; }
 
         [Required]
+        [DataType(DataType.DateTime)]
         public DateTime DateTimeStamp { get; set; }
 
         [StringLength(3000)]
+        [DataType(DataType.MultilineText)]
         public string MessegeText { get; set; }
     }
 }
