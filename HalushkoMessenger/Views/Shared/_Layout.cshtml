@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="ua">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,38 +8,61 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">HalushkoMessenger</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    @Html.Partial("_NavBar")
+    <div id="header">
+        <h1>MyMessenger - Спілкуйся Спілкуйся Спілкуйся</h1>
     </div>
+    <div class="wrapper">
+        <div id="menu">
+            <h2>Навігація по сайту</h2>
+            <ul>
+                <li><a href="#">Елемент списку</a></li>
+                <li><a href="#">Елемент списку</a></li>
+                <li><a href="#">Елемент списку</a></li>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - HalushkoMessenger - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                <li><a href="#">Елемент списку</a></li>
+                <li><a href="#">Елемент списку</a></li>
+
+                <li><a href="#">Елемент списку</a></li>
+                <div class="line"></div>
+                <li><a href="#">Елемент списку</a></li>
+                <div class="line"></div>
+                <li><a href="#">Елемент списку</a></li>
+                <div class="line"></div>
+                <li><a href="#">Елемент списку</a></li>
+                <li><a href="#">Елемент списку</a></li>
+                <li><a href="#">Елемент списку</a></li>
+
+            </ul>
         </div>
-    </footer>
+
+
+        <div id="renderBody">
+            @RenderBody()
+        </div>
+
+        <article id="main">
+            <div id="text">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pretium non ex a sollicitudin. Donec convallis magna non consequat consequat. Aenean consequat ligula at sapien venenatis rhoncus. Quisque in gravida nulla, a ultrices massa. Praesent lobortis consequat elit, viverra varius lectus vehicula consectetur. Suspendisse potenti. Donec pulvinar interdum magna nec convallis. Fusce purus tellus, ultrices cursus velit eget, placerat cursus felis.
+                    Aenean auctor lacus et ex fringilla, vitae dapibus nisi facilisis. Integer convallis iaculis tortor in pharetra. Etiam id mi erat. Vestibulum ac urna lorem. Nunc porttitor dictum ultricies. Morbi ac risus urna. Proin ullamcorper congue ornare. In hac habitasse platea dictumst. Aenean nunc quam, tincidunt quis sollicitudin euismod, dictum quis enim. Aenean a sodales dolor, sed blandit turpis. Nam bibendum finibus nunc, at porttitor libero mollis sit amet. Mauris eleifend mi id diam maximus molestie. Mauris non euismod neque, a tincidunt tortor. Cras non egestas dolor, laoreet varius dolor.
+                    Maecenas non lectus non magna bibendum egestas sed in velit. Morbi faucibus vel augue ut placerat. Sed eget sollicitudin nunc. Maecenas porta dolor eget quam ultrices, a efficitur sapien consectetur. Nullam nec mi pulvinar, fringilla ante quis, ultrices urna. In iaculis mi sapien, a feugiat libero facilisis eget. Pellentesque sagittis est et lectus iaculis commodo.
+                <p>
+                <p>
+                    Nam ut pretium dui. Donec id metus bibendum, pretium nulla in, faucibus nisi. Quisque nisi lorem, tempor ac ex id, finibus efficitur ipsum. Aliquam a velit vitae elit pretium pharetra vel quis mi. Maecenas porta, erat a consectetur consequat, felis nisl tempor ante, vitae porttitor turpis dui hendrerit velit. Quisque posuere auctor diam in suscipit. Nunc auctor, sapien et imperdiet cursus, nisi mauris placerat nibh, ut cursus tellus sem quis felis. Curabitur dignissim interdum metus id porta. Praesent diam ligula, mattis quis tristique at, gravida ut libero. Nam convallis metus non ligula semper, a volutpat orci mollis. Aliquam erat volutpat. Integer at orci at felis interdum ornare. Sed facilisis, mauris ut luctus mollis, dui ante imperdiet nisl, ac hendrerit est odio sed augue. Duis lorem urna, eleifend vitae luctus quis, placerat sit amet sem.
+                    Phasellus interdum cursus tellus. Nam hendrerit lacus vitae dui semper condimentum. Nunc vulputate metus sit amet ligula efficitur volutpat. Aliquam sed dolor nunc. Curabitur lacus metus, aliquam ac sem vel, venenatis placerat urna. Sed sed mauris et justo pellentesque lobortis ut vitae magna. In tempus enim commodo, bibendum ipsum in, dapibus diam. In semper aliquet lacus at tempor. Duis felis ipsum, scelerisque sit amet magna eu, convallis tempus justo. Curabitur pellentesque tortor non pellentesque scelerisque. Suspendisse rhoncus nisi nisi, non auctor diam ultricies sit amet. Nulla faucibus imperdiet leo, sit amet facilisis elit tristique vel. Nulla eget eros et quam lobortis laoreet porttitor in libero. Suspendisse ut dui sit amet nunc finibus scelerisque. In hac habitasse platea dictumst. Duis pharetra consequat libero, vitae vestibulum erat aliquam id.
+                </p>
+                <p>
+                    Nam ut pretium dui. Donec id metus bibendum, pretium nulla in, faucibus nisi. Quisque nisi lorem, tempor ac ex id, finibus efficitur ipsum. Aliquam a velit vitae elit pretium pharetra vel quis mi. Maecenas porta, erat a consectetur consequat, felis nisl tempor ante, vitae porttitor turpis dui hendrerit velit. Quisque posuere auctor diam in suscipit. Nunc auctor, sapien et imperdiet cursus, nisi mauris placerat nibh, ut cursus tellus sem quis felis. Curabitur dignissim interdum metus id porta. Praesent diam ligula, mattis quis tristique at, gravida ut libero. Nam convallis metus non ligula semper, a volutpat orci mollis. Aliquam erat volutpat. Integer at orci at felis interdum ornare. Sed facilisis, mauris ut luctus mollis, dui ante imperdiet nisl, ac hendrerit est odio sed augue. Duis lorem urna, eleifend vitae luctus quis, placerat sit amet sem.
+                    Phasellus interdum cursus tellus. Nam hendrerit lacus vitae dui semper condimentum. Nunc vulputate metus sit amet ligula efficitur volutpat. Aliquam sed dolor nunc. Curabitur lacus metus, aliquam ac sem vel, venenatis placerat urna. Sed sed mauris et justo pellentesque lobortis ut vitae magna. In tempus enim commodo, bibendum ipsum in, dapibus diam. In semper aliquet lacus at tempor. Duis felis ipsum, scelerisque sit amet magna eu, convallis tempus justo. Curabitur pellentesque tortor non pellentesque scelerisque. Suspendisse rhoncus nisi nisi, non auctor diam ultricies sit amet. Nulla faucibus imperdiet leo, sit amet facilisis elit tristique vel. Nulla eget eros et quam lobortis laoreet porttitor in libero. Suspendisse ut dui sit amet nunc finibus scelerisque. In hac habitasse platea dictumst. Duis pharetra consequat libero, vitae vestibulum erat aliquam id.
+                </p>
+            </div>
+        </article>
+    </div>
+    <div id="footer">
+        <p>Contacts: admin@mysyte.com</p>
+        <p>Copyright © MySyte.com, 2042</p>
+    </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

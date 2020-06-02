@@ -1,13 +1,11 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-a.navbar-brand {
+﻿
+/*a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
 }
 
-/* Provide sufficient contrast against white background */
+
 a {
   color: #0366d6;
 }
@@ -24,8 +22,7 @@ a {
   border-color: #1861ac;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
+
 html {
   font-size: 14px;
 }
@@ -51,15 +48,13 @@ button.accept-policy {
   line-height: inherit;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
+
 html {
   position: relative;
   min-height: 100%;
 }
 
 body {
-  /* Margin bottom by footer height */
   margin-bottom: 60px;
 }
 .footer {
@@ -67,5 +62,355 @@ body {
   bottom: 0;
   width: 100%;
   white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+  line-height: 60px; 
+}*/
+
+
+
+/*My CSS     !!!!!!!*/
+* {
+    box-sizing: border-box;
+}
+
+
+
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, ul, li {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+
+body {
+    font-family: Verdana, Arial, sans-serif;
+    background-color: white;
+}
+
+#header {
+    
+}
+
+    #header h1 {
+        font-size: 24px;
+        font-weight: bold;
+        padding: 50px 50px 50px 50px;
+        clear: both;
+        text-align: center;
+    }
+
+.dataTables_info, .pagination {
+    font-size: 75%;
+}
+
+.dataTables_info {
+    text-align: left;
+}
+
+.pagination {
+    text-align: left;
+    margin-top: 5px;
+}
+
+    .pagination li {
+        display: inline;
+        list-style: none;
+    }
+
+    .pagination a {
+        display: inline-block;
+        color: black;
+        padding: 5px 5px 5px;
+        text-decoration: none;
+        border: 1px solid #66CC00;
+    }
+
+        .pagination a:hover {
+            color: white;
+            background-color: #66CC00;
+        }
+#home {
+    font-weight:bold;
+}
+#nav {
+    background-color: #eee ;
+    border-bottom: 2px solid #66CC00;
+    /*position: fixed;*/
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+    #nav ul {
+        text-align: center;
+    }
+
+    #nav li {
+        display: inline;
+        list-style: none;
+    }
+    #nav a {
+        display: inline-block;
+        color: black;
+        padding: 25px 25px 25px;
+        text-decoration: none;
+        border-right: 2px solid #66CC00;
+        border-left: 2px solid #66CC00;
+    }
+
+        #nav a:hover {
+            color: white;
+            background-color: black;
+        }
+
+    #nav:after {
+        content: " ";
+        display: table;
+        clear: both;
+    }
+
+.wrapper {
+    background-color: #eee;
+    border: 2px solid #66CC00;
+    border-radius: 20px;
+}
+
+#menu h2 {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 10px 10px 10px;
+    border-bottom: 2px solid #66CC00;
+    text-align: center;
+}
+
+#menu {
+    float: right;
+    margin: 20px;
+    padding: 10px;
+    border: 2px solid #66CC00;
+    border-radius: 10px;
+    background-color: #CCFF66;
+    width: 300px;
+}
+
+    #menu li {
+        list-style: none;
+        margin: 10px;
+        text-align: center;
+    }
+
+    #menu a {
+        text-decoration: none;
+        color: #666666;
+        padding: 4px;
+    }
+
+        #menu a:hover {
+            color: white;
+            border-radius: 10px;
+            background-color: #66CC00;
+            padding-left: 60px;
+            padding-right: 60px;
+        }
+/*якась хуйня з лініями вони то товсті то тонкі через одну */
+.line {
+    border-bottom: 2px solid #66CC00;
+    width: 170px;
+    margin: auto;
+}
+
+#renderBody {
+    margin: 20px;
+    padding: 10px;
+    margin-right: 343px;
+    border: 2px solid #66CC00;
+    border-radius: 10px;
+    background-color: #CCFF66;
+}
+hr {
+    border-top: 2px solid #66CC00;
+}
+#renderBody h1 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.col-md-10 {
+    padding-left:0px; 
+}
+#form {
+    padding-top: 10px;
+    text-align: center;
+}
+
+    #form table {
+        margin: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #form input {
+        margin: 5px;
+        padding: 5px;
+        border: 2px solid #66CC00;
+        border-radius: 10px;
+    }
+
+        #form input:focus {
+            outline: none;
+            border-color: black;
+        }
+
+    #form select {
+        margin: 5px;
+        padding: 5px;
+        border: 2px solid #66CC00;
+        border-radius: 10px;
+        outline: none;
+    }
+
+    #form label {
+        padding: 5px;
+    }
+
+        #form label:hover {
+            border: 2px solid #66CC00;
+            border-radius: 15px;
+            color: white;
+            background-color: #66CC00;
+        }
+
+#renderBody input {
+    margin: 5px;
+    padding: 5px;
+    border: 2px solid #66CC00;
+    border-radius: 10px;
+}
+
+    #renderBody input:focus {
+        outline: none;
+        border-color: black;
+    }
+
+#renderBody select {
+    margin: 5px;
+    padding: 5px;
+    border: 2px solid #66CC00;
+    border-radius: 10px;
+    outline: none;
+}
+
+#renderBody label {
+    padding: 5px;
+}
+
+    #renderBody label:hover {
+        border-radius: 15px;
+        color: white;
+        background-color: #66CC00;
+    }
+
+
+
+.dataTable {
+    margin: 10px 10px 15px 0px;
+    border: 3px solid #66CC00;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+    .dataTable td, th {
+        padding: 5px;
+        border: 1px solid #66CC00;
+    }
+
+    .dataTable th {
+        border: 3px solid #66CC00;
+        width: 120px;
+    }
+
+#butOK {
+    margin-top: 10px;
+    width: 120px;
+    height: 40px;
+    font-weight: bold;
+    border: 2px solid #66CC00;
+}
+
+#butDELETE {
+    margin: 5px;
+    width: 60px;
+    height: 25px;
+    border: 2px solid #66CC00;
+}
+
+#butOK a {
+    text-decoration: none;
+    color: black;
+}
+
+#butOK:hover, #butDELETE:hover {
+    color: white;
+    background-color: #66CC00;
+}
+
+#forgive {
+    font-size: 12px;
+}
+/*
+#renderbody:after{
+	
+    clear:both;
+    display:table;
+    content:'';
+}
+*/
+.wrongValid {
+    margin: 10px !important;
+}
+
+.field-validation-error {
+    color: red;
+    font-size: 75%;
+}
+
+.input-validation-error {
+    border: 2px solid red !important;
+}
+
+#text p {
+    margin-right: 100px;
+    padding: 10px 30px 10px 30px;
+    line-height: 130%;
+}
+
+#footer {
+    font-size: .8em;
+    text-align: center;
+    padding: 10px 10px 30px 10px;
+}
+
+    #nav ul, #header h1, .wrapper, #footer p {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+.wrapper, #nav, #header, #footer {
+    min-width: 968px;
+}
+
+#renderBody {
+    min-width: 500px;
+}
+.validation-summary-errors li{
+    list-style:none;
+    font-size:90%;
+}
+.validation-summary-errors  {
+    border: 1px solid red;
+    border-radius:10px;
+    width:400px;
+    padding:5px;
 }
