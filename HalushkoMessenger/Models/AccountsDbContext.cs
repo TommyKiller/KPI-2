@@ -12,6 +12,7 @@ namespace HalushkoMessenger.Models
         public AccountsDbContext(DbContextOptions<AccountsDbContext> options)
             : base(options)
         {
+
         }
     }
 }
