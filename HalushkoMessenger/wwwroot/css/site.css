@@ -203,9 +203,12 @@ body {
         text-decoration: none;
         color: #666666;
         padding: 4px;
+        white-space:nowrap;
     }
 
         #menu a:hover {
+           
+
             color: white;
             border-radius: 10px;
             background-color: #66CC00;
