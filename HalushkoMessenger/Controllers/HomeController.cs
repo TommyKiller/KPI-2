@@ -10,7 +10,7 @@ namespace HalushkoMessenger.Controllers
     
     public class HomeController : Controller
     {
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         public IActionResult Dialogs()
         {

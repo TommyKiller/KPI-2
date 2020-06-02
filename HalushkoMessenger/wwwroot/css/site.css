@@ -153,12 +153,13 @@ body {
 
 #renderBody {
     margin: 20px;
-    padding: 10px;
+    padding: 15px;
     margin-right: 343px;
     border: 2px solid #66CC00;
     border-radius: 10px;
     background-color: #CCFF66;
 }
+
 hr {
     border-top: 2px solid #66CC00;
 }
@@ -348,6 +349,10 @@ hr {
 }
 
 /*Chat style*/
+.full-width {
+    margin-right:20px !important;
+}
+
 .userList {
     background: linear-gradient(to right,#57c1eb 0%,#246fa8 100%);
     border: 2px solid black;
@@ -377,7 +382,7 @@ hr {
     
 }
     .writingBox #mainInput {
-        width:400px;
+        width:500px;
         text-align: right;
         border: 2px solid black;
     }
