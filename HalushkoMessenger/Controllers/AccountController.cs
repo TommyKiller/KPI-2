@@ -21,12 +21,13 @@ namespace HalushkoMessenger.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        private readonly IConfiguration configuration;
+        private readonly IConfiguration _configuration;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration)
         {
             _userManager = userManager;
-            _signInManager = signInManager; 
+            _signInManager = signInManager;
+            _configuration = configuration;
         }
 
         //
@@ -59,7 +60,7 @@ namespace HalushkoMessenger.Controllers
 
                     // Creating user`s database
                     DbContextOptions<UserDbContext> options = new DbContextOptionsBuilder<UserDbContext>()
-                        .UseSqlServer(String.Format(configuration.GetConnectionString("UserConnection"), user.UserName))
+                        .UseSqlServer(String.Format(_configuration.GetConnectionString("UserConnection"), user.UserName))
                         .Options;
 
                     _ = new UserDbContext(options).Database.EnsureCreated();
@@ -94,7 +95,7 @@ namespace HalushkoMessenger.Controllers
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginUserViewModel model)
-        {
+        {   
             if (ModelState.IsValid)
             {
                 var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, false);
@@ -126,7 +127,7 @@ namespace HalushkoMessenger.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Dialogs", "Home");
         }
     }
 }
