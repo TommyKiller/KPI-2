@@ -349,13 +349,14 @@ hr {
 
 /*Chat style*/
 .userList {
+    background: linear-gradient(to right,#57c1eb 0%,#246fa8 100%);
     border: 2px solid black;
     border-radius: 10px;
     width: 200px;
     float: left;
     height: 650px;
     overflow: auto scroll;
-    padding:5px;
+    padding: 5px;
 }
 .chatBox {
     background: linear-gradient(to right,#57c1eb 0%,#246fa8 100%);
@@ -372,10 +373,14 @@ hr {
     padding: 5px;
 }
 .writingBox {
-    border: 2px solid black;
-    border-radius: 10px;
-    margin:5px;
+    text-align:right;
+    
 }
+    .writingBox #mainInput {
+        width:400px;
+        text-align: right;
+        border: 2px solid black;
+    }
 /*          */
 .container {
     border: 2px solid #dedede;
