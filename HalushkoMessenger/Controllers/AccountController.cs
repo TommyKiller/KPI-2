@@ -10,6 +10,9 @@ using HalushkoMessenger.Models;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using AutoMapper;
 using Microsoft.CodeAnalysis.FlowAnalysis;
+using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
 
 namespace HalushkoMessenger.Controllers
 {
@@ -18,6 +21,7 @@ namespace HalushkoMessenger.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly IConfiguration configuration;
 
         public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
@@ -29,7 +33,7 @@ namespace HalushkoMessenger.Controllers
         // GET: /Accont/Register
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult Register()
+        public IActionResult Register()
         {
             return View();
         }
@@ -39,7 +43,7 @@ namespace HalushkoMessenger.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterUserViewModel model)
+        public async Task<IActionResult> Register(RegisterUserViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -52,6 +56,13 @@ namespace HalushkoMessenger.Controllers
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, true);
+
+                    // Creating user`s database
+                    DbContextOptions<UserDbContext> options = new DbContextOptionsBuilder<UserDbContext>()
+                        .UseSqlServer(String.Format(configuration.GetConnectionString("UserConnection"), user.Login))
+                        .Options;
+
+                    _ = new UserDbContext(options).Database.EnsureCreated();
 
                     return RedirectToAction("Dialogs", "Home");
                 }
@@ -67,26 +78,55 @@ namespace HalushkoMessenger.Controllers
             return View(model);
         }
 
-        ////
-        //// GET: /Accont/Login
-        //[HttpGet]
-        //[AllowAnonymous]
-        //public ActionResult Login(string returnUrl)
-        //{
-        //    ViewBag.ReturnUrl = returnUrl;
+        //
+        // GET: /Accont/Login
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Login(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
 
-        //    return View();
-        //}
+            return View();
+        }
 
-        ////
-        //// POST: /Accont/Login
-        //[HttpPost]
-        //[AllowAnonymous]
-        //public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
-        //{
-        //    if (model.)
+        //
+        // POST: /Accont/Login
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> Login(LoginUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(model.Login, model.Password, model.RememberMe, false);
 
-        //    return View();
-        //}
+                if (result.Succeeded)
+                {
+                    if (!String.IsNullOrEmpty(ViewBag.ReturnUrl) && Url.IsLocalUrl(ViewBag.ReturnUrl))
+                    {
+                        return Redirect(ViewBag.ReturnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Dialogs", "Home");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("signIn", "Wrong login or password");
+                }
+            }
+
+            return View(model);
+        }
+
+        //
+        // POST: Accout/Logout
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
