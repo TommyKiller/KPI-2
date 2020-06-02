@@ -79,26 +79,55 @@ namespace HalushkoMessenger.Controllers
             return View(model);
         }
 
-        ////
-        //// GET: /Accont/Login
-        //[HttpGet]
-        //[AllowAnonymous]
-        //public ActionResult Login(string returnUrl)
-        //{
-        //    ViewBag.ReturnUrl = returnUrl;
+        //
+        // GET: /Accont/Login
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Login(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
 
-        //    return View();
-        //}
+            return View();
+        }
 
-        ////
-        //// POST: /Accont/Login
-        //[HttpPost]
-        //[AllowAnonymous]
-        //public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
-        //{
-        //    if (model.)
+        //
+        // POST: /Accont/Login
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> Login(LoginUserViewModel model)
+        {   
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, false);
 
-        //    return View();
-        //}
+                if (result.Succeeded)
+                {
+                    if (!String.IsNullOrEmpty(ViewBag.ReturnUrl) && Url.IsLocalUrl(ViewBag.ReturnUrl))
+                    {
+                        return Redirect(ViewBag.ReturnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Dialogs", "Home");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("signIn", "Wrong login or password");
+                }
+            }
+
+            return View(model);
+        }
+
+        //
+        // POST: Accout/Logout
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Register", "Account");
+        }
     }
 }
