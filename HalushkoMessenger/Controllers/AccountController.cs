@@ -10,6 +10,9 @@ using HalushkoMessenger.Models;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using AutoMapper;
 using Microsoft.CodeAnalysis.FlowAnalysis;
+using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
 
 namespace HalushkoMessenger.Controllers
 {
@@ -18,18 +21,20 @@ namespace HalushkoMessenger.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly IConfiguration _configuration;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration)
         {
             _userManager = userManager;
-            _signInManager = signInManager; 
+            _signInManager = signInManager;
+            _configuration = configuration;
         }
 
         //
         // GET: /Accont/Register
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult Register()
+        public IActionResult Register()
         {
             return View();
         }
@@ -39,7 +44,7 @@ namespace HalushkoMessenger.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterUserViewModel model)
+        public async Task<IActionResult> Register(RegisterUserViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -52,6 +57,13 @@ namespace HalushkoMessenger.Controllers
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, true);
+
+                    // Creating user`s database
+                    DbContextOptions<UserDbContext> options = new DbContextOptionsBuilder<UserDbContext>()
+                        .UseSqlServer(String.Format(_configuration.GetConnectionString("UserConnection"), user.UserName))
+                        .Options;
+
+                    _ = new UserDbContext(options).Database.EnsureCreated();
 
                     return RedirectToAction("Dialogs", "Home");
                 }
@@ -69,45 +81,24 @@ namespace HalushkoMessenger.Controllers
 
         ////
         //// GET: /Accont/Login
-        [HttpGet]
-        [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
-        {
-            ViewBag.ReturnUrl = returnUrl;
+        //[HttpGet]
+        //[AllowAnonymous]
+        //public ActionResult Login(string returnUrl)
+        //{
+        //    ViewBag.ReturnUrl = returnUrl;
 
-            return View();
-        }
+        //    return View();
+        //}
 
         ////
         //// POST: /Accont/Login
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<ActionResult> Login(LoginUserViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                Mapper mapper = new Mapper(new MapperConfiguration(cfg => cfg.CreateMap<LoginUserViewModel, User>()));
+        //[HttpPost]
+        //[AllowAnonymous]
+        //public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        //{
+        //    if (model.)
 
-                User user = mapper.Map<LoginUserViewModel, User>(model);
-
-                var result = await _userManager.CreateAsync(user, model.Password);
-
-                if (result.Succeeded)
-                {
-                    await _signInManager.SignInAsync(user, true);
-
-                    return RedirectToAction("Dialogs", "Home");
-                }
-                else
-                {
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError(error.Code, error.Description);
-                    }
-                }
-            }
-
-            return View(model);
-        }
+        //    return View();
+        //}
     }
 }

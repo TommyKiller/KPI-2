@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HalushkoMessenger.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         [HttpGet]
