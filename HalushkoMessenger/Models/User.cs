@@ -14,6 +14,16 @@ namespace HalushkoMessenger.Models
     {
         [Key]
         [StringLength(255)]
-        public string Login { get; set; }
+        [Display(Name = "User name")]
+        public override string UserName { get; set; }
+
+        [Required]
+        [StringLength(255)]
+        [Display(Name = "First name")]
+        public string Name { get; set; }
+
+        [StringLength(255)]
+        [Display(Name = "Surname")]
+        public string Surname { get; set; }
     }
 }

@@ -10,8 +10,8 @@ namespace HalushkoMessenger.ViewModels
     {
         [Required]
         [StringLength(255)]
-        [Display(Name = "Login")]
-        public string Login { get; set; }
+        [Display(Name = "User name")]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

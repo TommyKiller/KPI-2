@@ -59,7 +59,7 @@ namespace HalushkoMessenger.Controllers
 
                     // Creating user`s database
                     DbContextOptions<UserDbContext> options = new DbContextOptionsBuilder<UserDbContext>()
-                        .UseSqlServer(String.Format(configuration.GetConnectionString("UserConnection"), user.Login))
+                        .UseSqlServer(String.Format(configuration.GetConnectionString("UserConnection"), user.UserName))
                         .Options;
 
                     _ = new UserDbContext(options).Database.EnsureCreated();
@@ -97,7 +97,7 @@ namespace HalushkoMessenger.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(model.Login, model.Password, model.RememberMe, false);
+                var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, false);
 
                 if (result.Succeeded)
                 {
