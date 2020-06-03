@@ -3,7 +3,40 @@
     ViewData["Title"] = "Profile";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div id="renderBody" class="full-width">
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="well well-sm">
+                <div class="row">
+                    <div class="col-sm-6 col-md-4">
+                        <img src="/w3images/bandmember.jpg" alt="Avatar">
+                    </div>
+                    <div class="col-sm-6 col-md-8">
+                        <h4>
+                            Hello @ViewBag.Name @ViewBag.Surname
+                            <br />
+                            User Login: @ViewBag.Login
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<div id="renderBody" class="full-width">
 
     <h1>Profile</h1>
     <div class="container" style="align-self:center;">
@@ -13,4 +46,4 @@
         <p>User Login: @ViewBag.Login</p>
     </div>
 
-</div>
+</div>-->

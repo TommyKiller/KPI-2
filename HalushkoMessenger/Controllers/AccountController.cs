@@ -138,6 +138,6 @@ namespace HalushkoMessenger.Controllers
         public IActionResult Profile()
         {
             return View();
-    }
+        }
 }
 }
