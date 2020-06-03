@@ -16,7 +16,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HalushkoMessenger.Controllers
 {
-    [Authorize]
     public class AccountController : Controller
     {
         private readonly UserManager<User> _userManager;
@@ -127,7 +126,7 @@ namespace HalushkoMessenger.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Register", "Account");
+            return RedirectToAction("Login", "Account");
         }
     }
 }
