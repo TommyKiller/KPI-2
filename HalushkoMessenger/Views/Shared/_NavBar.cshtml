@@ -6,8 +6,14 @@
 
 <div id="nav">
     <ul>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <li>
+                <a asp-area="" asp-controller="Home" asp-action="Dialogs">Hello, <span id="userName">@UserManager.GetUserName(User)</span> !</a>
+            </li>
+        }
         <li id="home">
-            <a asp-area="" asp-controller="Home" asp-action="Dialogs">Dialogs</a>
+            <a asp-area="" asp-controller="Home" asp-action="Dialogs">My Dialogs</a>
         </li>
         @if (SignInManager.IsSignedIn(User))
         {
