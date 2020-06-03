@@ -1,0 +1,63 @@
+﻿@model HalushkoMessenger.ViewModels.RegisterUserViewModel
+
+@{
+    ViewData["Title"] = "Edit_Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+
+
+    <div class="panel-default" style="margin-left:33%; margin-top:20px;">
+        @using (Html.BeginForm("Edit_Profile", "Account", FormMethod.Post, new {HttpMethod ="POST", OnSuccess = "Done", OnFailure="Fail" }))
+         {
+                <h1>Edit_Profile</h1>
+
+            <div class="form-group">
+
+                @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+                <div class="col-lg-6">
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.UserName)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+                <div class="col-lg-6">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Name)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Surname, new { @class = "col-md-2 control-label" })
+                <div class="col-lg-6">
+                    @Html.TextBoxFor(m => m.Surname, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Surname)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                <div class="col-lg-6">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Password)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+                <div class="col-lg-6">
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-danger" value="Change" style="margin-left:22%;">
+                </div>
+            </div>
+         }
+    </div>
