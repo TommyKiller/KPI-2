@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="renderBody" class="full-width">
+
+    <h1>Profile</h1>
+    <div class="container" style="align-self:center;">
+        <img src="/w3images/bandmember.jpg" alt="Avatar">
+        <p>Hello @ViewBag.Name @ViewBag.Surname</p>
+
+        <p>User Login: @ViewBag.Login</p>
+    </div>
+
+</div>

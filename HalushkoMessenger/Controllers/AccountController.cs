@@ -129,5 +129,15 @@ namespace HalushkoMessenger.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Register", "Account");
         }
+
+
+        //
+        // POST: Accout/Profile
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Profile()
+        {
+            return View();
     }
+}
 }

@@ -28,5 +28,11 @@ namespace HalushkoMessenger.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public IActionResult Profile()
+        {
+            return View();
+        }
     }
 }
