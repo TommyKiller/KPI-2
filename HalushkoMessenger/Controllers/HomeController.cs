@@ -9,32 +9,35 @@ namespace HalushkoMessenger.Controllers
 {
     public class HomeController : Controller
     {
-        // Home/Dialogs
+        //
+        // GET: Home/Dialogs
         [HttpGet]
         public IActionResult Dialogs()
         {
             return View();
         }
 
-        // Home/Dialogs/1
-        [HttpGet]
-        public IActionResult Dialogs(int id)
-        {
-            return View();
-        }
+        //// Home/Dialogs/DialogID
+        //[HttpGet]
+        //public IActionResult Dialogs(int id)
+        //{
+        //    return View();
+        //}
 
-        [HttpGet]
-        public IActionResult Index()
-        {
-            return View();
-        }
+        //[HttpGet]
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
 
-        [HttpGet]
-        public IActionResult About()
-        {
-            return View();
-        }
+        //[HttpGet]
+        //public IActionResult About()
+        //{
+        //    return View();
+        //}
 
+        //
+        // GET: Home/Profile
         [HttpGet]
         public IActionResult Profile()
         {
