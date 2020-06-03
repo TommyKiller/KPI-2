@@ -94,6 +94,7 @@ namespace HalushkoMessenger.Controllers
         // POST: /Accont/Login
         [HttpPost]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginUserViewModel model)
         {   
             if (ModelState.IsValid)
@@ -121,9 +122,8 @@ namespace HalushkoMessenger.Controllers
         }
 
         //
-        // POST: Accout/Logout
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        // GET: Accout/Logout
+        [HttpGet]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
