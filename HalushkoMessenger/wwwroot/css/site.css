@@ -91,7 +91,9 @@ body {
             color: white;
             background-color: black;
         }
-
+#userName {
+    font-style:italic;
+}
     #nav:after {
         content: " ";
         display: table;

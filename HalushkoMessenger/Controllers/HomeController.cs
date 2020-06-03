@@ -7,12 +7,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HalushkoMessenger.Controllers
 {
-    
     public class HomeController : Controller
     {
-        //[Authorize]
+        // Home/Dialogs
         [HttpGet]
         public IActionResult Dialogs()
+        {
+            return View();
+        }
+
+        // Home/Dialogs/1
+        [HttpGet]
+        public IActionResult Dialogs(int id)
         {
             return View();
         }

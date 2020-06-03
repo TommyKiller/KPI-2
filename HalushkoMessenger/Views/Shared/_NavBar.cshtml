@@ -1,19 +1,64 @@
-﻿<div id="nav">
+﻿@using Microsoft.AspNetCore.Identity;
+@using HalushkoMessenger.Models
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+
+<div id="nav">
     <ul>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <li>
+                <a asp-area="" asp-controller="Home" asp-action="Dialogs">Hello, <span id="userName">@UserManager.GetUserName(User)</span> !</a>
+            </li>
+        }
         <li id="home">
-            <a asp-area="" asp-controller="Home" asp-action="Dialogs">Dialogs</a>
+            <a asp-area="" asp-controller="Home" asp-action="Dialogs">My Dialogs</a>
         </li>
-        <li>
-            <a asp-area="" asp-controller="Account" asp-action="Register">Register</a>
-        </li>
-        <li>
-            <a asp-area="" asp-controller="Account" asp-action="Login">Login</a>
-        </li>
-        <li>
-            <a asp-area="" asp-controller="Account" asp-action="Profile">Profile</a>
-        </li>
-        <li>
-            <a asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
-        </li>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <li>
+                <a asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+            </li>
+        }
+        else
+        {
+            <li>
+                <a asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+            </li>
+            <li>
+                <a asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+            </li>
+        }
+
     </ul>
 </div>
+
+@*@using Microsoft.AspNetCore.Identity
+    @using HalushkoMessenger.Models
+
+    @inject SignInManager<User> SignInManager
+    @inject UserManager<User> UserManager
+
+    <ul class="navbar-nav">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <li class="nav-item">
+                <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+            </li>
+            <li class="nav-item">
+                <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                </form>
+            </li>
+        }
+        else
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+            </li>
+        }
+    </ul>*@

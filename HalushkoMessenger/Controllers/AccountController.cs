@@ -16,7 +16,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HalushkoMessenger.Controllers
 {
-    [Authorize]
     public class AccountController : Controller
     {
         private readonly UserManager<User> _userManager;
@@ -94,6 +93,7 @@ namespace HalushkoMessenger.Controllers
         // POST: /Accont/Login
         [HttpPost]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginUserViewModel model)
         {   
             if (ModelState.IsValid)
@@ -121,13 +121,12 @@ namespace HalushkoMessenger.Controllers
         }
 
         //
-        // POST: Accout/Logout
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        // GET: Accout/Logout
+        [HttpGet]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Register", "Account");
+            return RedirectToAction("Login", "Account");
         }
 
 
