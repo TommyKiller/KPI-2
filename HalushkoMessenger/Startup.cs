@@ -29,13 +29,11 @@ namespace HalushkoMessenger
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<UserDbContext>();
-
-            services.AddDbContext<AccountsDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("Default")));
 
             services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<AccountsDbContext>();
+                .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>

@@ -13,6 +13,7 @@ using Microsoft.CodeAnalysis.FlowAnalysis;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace HalushkoMessenger.Controllers
 {
@@ -20,13 +21,29 @@ namespace HalushkoMessenger.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        private readonly IConfiguration _configuration;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _configuration = configuration;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && !(_userManager is null))
+            {
+                _userManager.Dispose();
+            }
+
+            base.Dispose(disposing);
+        }
+
+        private void WriteErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(error.Code, error.Description);
+            }
         }
 
         //
@@ -57,21 +74,11 @@ namespace HalushkoMessenger.Controllers
                 {
                     await _signInManager.SignInAsync(user, true);
 
-                    // Creating user`s database
-                    DbContextOptions<UserDbContext> options = new DbContextOptionsBuilder<UserDbContext>()
-                        .UseSqlServer(String.Format(_configuration.GetConnectionString("UserConnection"), user.UserName))
-                        .Options;
-
-                    _ = new UserDbContext(options).Database.EnsureCreated();
-
                     return RedirectToAction("Dialogs", "Home");
                 }
                 else
                 {
-                    foreach(var error in result.Errors)
-                    {
-                        ModelState.AddModelError(error.Code, error.Description);
-                    }
+                    WriteErrors(result);
                 }
             }
 
@@ -129,6 +136,50 @@ namespace HalushkoMessenger.Controllers
             return RedirectToAction("Login", "Account");
         }
 
+        //
+        // GET: Account/Edit
+        [HttpGet]
+        public async Task<IActionResult> Edit()
+        {
+            User user = await _userManager.GetUserAsync(User);
+
+            Mapper mapper = new Mapper(new MapperConfiguration(cfg => cfg.CreateMap<User, EditUserViewModel>()));
+
+            EditUserViewModel model = mapper.Map<User, EditUserViewModel>(user);
+
+            return View(model);
+        }
+
+        //
+        // PUT: Account/Edit
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(EditUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = await _userManager.GetUserAsync(User);
+
+                Mapper mapper = new Mapper(new MapperConfiguration(cfg => cfg.CreateMap<EditUserViewModel, User>()));
+
+                user = mapper.Map<EditUserViewModel, User>(model);
+
+                var result = await _userManager.UpdateAsync(user);
+
+                if (result.Succeeded)
+                {
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+
+                    return RedirectToAction("Profile", "Account");
+                }
+                else
+                {
+                    WriteErrors(result);
+                }
+            }
+
+            return View(model);
+        }
 
         //
         // POST: Accout/Profile
