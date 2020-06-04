@@ -387,6 +387,7 @@ hr {
         width:500px;
         text-align: right;
         border: 2px solid black;
+        margin-right:0;
     }
 /*          */
 .container {
