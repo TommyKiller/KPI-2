@@ -3,17 +3,20 @@
 @{
     ViewData["Title"] = "Dialogs";
 }
-    <div id="renderBody" class="full-width">
-        <h1>Your dialogs</h1>
-        <div class="userList">
-            @foreach (var dialog in Model.UserDialogs)
-            {
-                <div class="container">
-                    @Html.ActionLink(dialog.CompanionFullName, "Dialog", "Home", new {id = dialog.DialogId })
-                </div>
-            }
+@Html.Partial("_Menu")
 
-        </div>
+<div id="renderBody">
+    <h1>Your dialogs</h1>
+    <div class="userList">
+        Chose your dialog :
+        @foreach (var dialog in Model.UserDialogs)
+        {
+            <div class="container">
+                @Html.ActionLink(dialog.CompanionFullName, "Dialog", "Home", new { id = dialog.DialogId })
+            </div>
+        }
+
     </div>
-    
+</div>
+
 

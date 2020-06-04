@@ -154,6 +154,8 @@ body {
 }
 
 #renderBody {
+    text-align:center;
+    height:800px;
     margin: 20px;
     padding: 15px;
     margin-right: 343px;
@@ -359,11 +361,12 @@ hr {
     background: linear-gradient(to right,#57c1eb 0%,#246fa8 100%);
     border: 2px solid black;
     border-radius: 10px;
-    width: 200px;
+    width:780px;
     float: left;
     height: 650px;
     overflow: auto scroll;
     padding: 5px;
+    margin:10px;
 }
 .chatBox {
     background: linear-gradient(to right,#57c1eb 0%,#246fa8 100%);
