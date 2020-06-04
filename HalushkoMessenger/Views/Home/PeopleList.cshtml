@@ -1,7 +1,21 @@
-﻿@{
+﻿@model HalushkoMessenger.ViewModels.SearchUserViewModel
+
+@{
     ViewData["Title"] = "PeopleList";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>PeopleList</h1>
+<div id="renderBody">
+    <h1>Your dialogs</h1>
+    <div class="userList">
+        Chose your dialog :
+        @foreach (var user in Model.Users)
+        {
+            <div class="container">
+                @Html.ActionLink(user.Name, "Search", "Home", user)
+            </div>
+        }
 
+    </div>
+</div>

@@ -7,7 +7,6 @@
     <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
 
-
     <div class="panel-default" style="margin-left:33%; margin-top:20px;">
         <h1>Edit Profile</h1>
         @using (Html.BeginForm("Edit", "Account", FormMethod.Post, new { HttpMethod = "POST", OnSuccess = "Done", OnFailure = "Fail" }))
