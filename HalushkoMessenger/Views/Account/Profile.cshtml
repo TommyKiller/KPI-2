@@ -1,4 +1,9 @@
 ﻿@model HalushkoMessenger.ViewModels.UserProfileViewModel
+@using Microsoft.AspNetCore.Identity;
+@using HalushkoMessenger.Models
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
 @{
     ViewData["Title"] = "Profile";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,20 +14,20 @@
             <div class="well well-sm">
                 <div class="row">
                     <div class="col-sm-6 col-md-4">
-                        <img src="/w3images/bandmember.jpg" alt="Avatar">
+                        <img src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png" alt="Avatar" />
                     </div>
                     <div class="col-sm-6 col-md-8">
                         @{
                             <h4>
-                                Hello model.Name model.Surname
+                                Hello <span id="Name">@UserManager.GetUserName(User)</span> <span id="Surname">@UserManager.GetUserName(User)</span>
                                 <br />
-                                User Login: model.UserName
+                                User Login: <span id="userName">@UserManager.GetUserName(User)</span>
                             </h4>
                         }
                     </div>
                 </div>
-                            <a asp-area="" asp-controller="Account" asp-action="Edit"><input type="submit" class="btn btn-danger" value="Edit profile" style="margin-left: 20px; margin-top: 20px;" /></a>
+                <a asp-area="" asp-controller="Account" asp-action="Edit"><input type="submit" class="btn btn-danger" value="Edit profile" style="margin-left: 20px; margin-top: 20px;" /></a>
             </div>
+        </div>
     </div>
 </div>
-
