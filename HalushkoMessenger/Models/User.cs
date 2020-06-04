@@ -12,7 +12,7 @@ namespace HalushkoMessenger.Models
 {
     public class User : IdentityUser
     {
-        [Key]
+        [Required]
         [StringLength(255)]
         [Display(Name = "User name")]
         public override string UserName { get; set; }

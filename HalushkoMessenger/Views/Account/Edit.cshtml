@@ -1,4 +1,4 @@
-﻿@model HalushkoMessenger.ViewModels.RegisterUserViewModel
+﻿@model HalushkoMessenger.ViewModels.EditUserViewModel
 
 @{
     ViewData["Title"] = "Edit_Profile";
@@ -9,19 +9,10 @@
 
 
     <div class="panel-default" style="margin-left:33%; margin-top:20px;">
-        @using (Html.BeginForm("Edit_Profile", "Account", FormMethod.Post, new {HttpMethod ="POST", OnSuccess = "Done", OnFailure="Fail" }))
-         {
-                <h1>Edit_Profile</h1>
-
-            <div class="form-group">
-
-                @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
-                <div class="col-lg-6">
-                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.UserName)
-                </div>
-            </div>
-
+        <h1>Edit Profile</h1>
+        @using (Html.BeginForm("Edit", "Account", FormMethod.Post, new { HttpMethod = "POST", OnSuccess = "Done", OnFailure = "Fail" }))
+        {
+            @Html.AntiForgeryToken()
             <div class="form-group">
                 @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
                 <div class="col-lg-6">
@@ -59,5 +50,5 @@
                     <input type="submit" class="btn btn-danger" value="Change" style="margin-left:22%;">
                 </div>
             </div>
-         }
+        }
     </div>
