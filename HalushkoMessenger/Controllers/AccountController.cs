@@ -183,12 +183,18 @@ namespace HalushkoMessenger.Controllers
         }
 
         //
-        // POST: Accout/Profile
+        // GET: Accout/Profile
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult Profile()
+        public async Task<IActionResult> Profile()
         {
-            return View();
+            User user = await _userManager.GetUserAsync(User);
+            
+            Mapper mapper = new Mapper(new MapperConfiguration(cfg => cfg.CreateMap<User, UserProfileViewModel>()));
+            
+            UserProfileViewModel model = mapper.Map<User, UserProfileViewModel>(user);
+
+            return View(model);
         }
 }
 }
