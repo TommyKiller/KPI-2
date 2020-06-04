@@ -1,4 +1,5 @@
 ﻿@model HalushkoMessenger.ViewModels.UserDialogsViewModel
+
 @{
     ViewData["Title"] = "Dialogs";
 }
@@ -8,35 +9,11 @@
             @foreach (var dialog in Model.UserDialogs)
             {
                 <div class="container">
-                    @Html.ActionLink(dialog.CompanionFullName,"Dialog","Home",new {id=dialog.DialogId})
+                    @Html.ActionLink(dialog.CompanionFullName, "Dialog", "Home", new { id = dialog.DialogId })
                 </div>
             }
 
         </div>
-        <div class="chatBox">
-            <div class="messageBox">
-                <div class="container">
-                    <img src="/w3images/bandmember.jpg" alt="Avatar">
-                    <p>Hello. How are you today?</p>
-                    <span class="time-right">11:00</span>
-                </div>
-
-                <div class="container darker">
-                    <img src="/w3images/avatar_g2.jpg" alt="Avatar" class="right">
-                    <p>Hey! I'm fine. Thanks for asking!</p>
-                    <span class="time-left">11:01</span>
-                </div>
-                <div class="empty-dialog">
-                    <p>Please chose some dialog !</p>
-                </div>
-            </div>
-            <div class="writingBox">
-                <input id="mainInput" type="text" placeholder="..." />
-                <button style="font-size:20px; border-radius:10px;"><i class="fa fa-send-o"></i></button>
-            </div>
-            
-        </div>
-    
     </div>
-
+    
 
