@@ -52,9 +52,9 @@ namespace HalushkoMessenger.Controllers
         //
         // POST: Home/Dialog/dialogID
         [HttpPost]
-        public IActionResult Dialog(int dialogId, string messageText)
+        public IActionResult Dialog(int dialogId, string senderId, string recepientId, string messageText)
         {
-            throw new NotImplementedException();
+
         }
 
         //

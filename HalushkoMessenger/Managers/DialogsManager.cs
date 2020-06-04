@@ -34,6 +34,16 @@ namespace HalushkoMessenger.Managers
             }
         }
 
+        public User GetUserById(string userId)
+        {
+            return _context.Users.Single(u => u.Id == userId);
+        }
+
+        public User GetUserByUserName(string userName)
+        {
+            return _context.Users.Single(u => u.UserName == userName);
+        }
+
         public IEnumerable<UserDialog> GetAllUserDialogs(string userId)
         {
             return _context.UserDialogs.Where(ud => ud.UserId == userId);
@@ -60,9 +70,29 @@ namespace HalushkoMessenger.Managers
             _context.SaveChanges();
         }
 
+        public bool DialogExists(string user1Id, string user2Id)
+        {
+            return _context.Dialogs.Any(d => (d.User1Id == user1Id && d.User2Id == user2Id) ||
+                d.User1Id == user2Id && d.User2Id == user1Id);
+        }
+
         public void StartDialog(string senderId, string recepientId)
         {
-            throw new NotImplementedException();
+            var sender = GetUserById(senderId);
+            var recepient = GetUserById(recepientId);
+
+            var dialog = _context.Dialogs.Add(new Dialog
+            {
+                User1 = sender,
+                User2 = recepient
+            });
+
+            var senderDialog = _context.UserDialogs.Add(new UserDialog
+            {
+                User = sender,
+                Dialog = dialog,
+
+            });
         }
     }
 }
