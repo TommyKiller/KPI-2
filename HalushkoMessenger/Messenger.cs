@@ -6,14 +6,14 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 
-namespace HalushkoMessenger.Managers
+namespace HalushkoMessenger
 {
-    public class DialogsManager : IDisposable
+    public class Messenger : IDisposable
     {
         private bool disposing;
         private readonly ApplicationDbContext _context;
 
-        public DialogsManager(ApplicationDbContext context)
+        public Messenger(ApplicationDbContext context)
         {
             disposing = false;
             _context = context;
@@ -34,9 +34,9 @@ namespace HalushkoMessenger.Managers
             }
         }
 
-        public User GetUserById(string userId)
+        public IEnumerable<User> GetAllUsersByUserNameSubstr(string userNameSubstr)
         {
-            return _context.Users.Single(u => u.Id == userId);
+            return _context.Users.Where(u => u.UserName == userNameSubstr);
         }
 
         public IEnumerable<UserDialog> GetAllUserDialogs(string userId)
@@ -49,26 +49,24 @@ namespace HalushkoMessenger.Managers
             return _context.Messages.Where(m => m.DialogId == dialogId).ToList();
         }
 
-        public void SendMessage(int dialogId, string senderId, string recipientId, string messageText, DateTime dateTimeStamp)
+        public Dialog CreateDialog(User user1, User user2)
         {
-            Message message = new Message
-            {
-                DialogId = dialogId,
-                SenderUserId = senderId,
-                RecipientUserId = recipientId,
-                DateTimeStamp = dateTimeStamp,
-                MessegeText = messageText
-            };
+            return new Dialog();
+        }
 
-            _context.Messages.Add(message);
+        public UserDialog CreateUserDialog(User user, Dialog dialog, string companionFulName)
+        {
+            return new UserDialog();
+        }
 
+        public void SaveChanges()
+        {
             _context.SaveChanges();
         }
 
-        public bool DialogExists(string user1Id, string user2Id)
+        public Task<int> SaveChangesAsync()
         {
-            return _context.Dialogs.Any(d => (d.User1Id == user1Id && d.User2Id == user2Id) ||
-                d.User1Id == user2Id && d.User2Id == user1Id);
+            return _context.SaveChangesAsync();
         }
     }
 }

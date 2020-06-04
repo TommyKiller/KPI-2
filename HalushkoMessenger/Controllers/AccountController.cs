@@ -14,7 +14,6 @@ using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
-using HalushkoMessenger.Managers;
 
 namespace HalushkoMessenger.Controllers
 {

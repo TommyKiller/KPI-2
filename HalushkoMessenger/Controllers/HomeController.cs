@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using HalushkoMessenger.Managers;
 using HalushkoMessenger.Models;
 using HalushkoMessenger.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -15,12 +14,12 @@ namespace HalushkoMessenger.Controllers
     public class HomeController : Controller
     {
         private readonly UserManager<User> _userManager;
-        private readonly DialogsManager _dialogsManager;
+        private readonly Messenger _messenger;
 
-        public HomeController(UserManager<User> userManager, DialogsManager dialogsManager)
+        public HomeController(UserManager<User> userManager, Messenger messenger)
         {
             _userManager = userManager;
-            _dialogsManager = dialogsManager;
+            _messenger = messenger;
         }
 
         //
@@ -30,7 +29,7 @@ namespace HalushkoMessenger.Controllers
         {
             UserDialogsViewModel model = new UserDialogsViewModel
             {
-                UserDialogs = _dialogsManager.GetAllUserDialogs(_userManager.GetUserId(User)).ToList()
+                UserDialogs = _messenger.GetAllUserDialogs(_userManager.GetUserId(User)).ToList()
             };
 
             return View(model);
@@ -43,7 +42,7 @@ namespace HalushkoMessenger.Controllers
         {
             DialogMessagesViewModel model = new DialogMessagesViewModel
             {
-                Messages = _dialogsManager.GetAllDialogMessages(dialogId)
+                Messages = _messenger.GetAllDialogMessages(dialogId)
             };
 
             return View(model);
@@ -55,6 +54,42 @@ namespace HalushkoMessenger.Controllers
         public IActionResult Dialog(SendMessageViewModel model)
         {
             throw new NotImplementedException();
+        }
+
+        //
+        // GET: Home/Search
+        [HttpGet]
+        public IActionResult Search()
+        {
+            return View();
+        }
+
+        //
+        // GET: Home/Search/userNameSubstring
+        [HttpGet]
+        public IActionResult Search(string userNameSubstr)
+        {
+            SearchUserViewModel model = new SearchUserViewModel
+            {
+                Users = _messenger.GetAllUsersByUserNameSubstr(userNameSubstr)
+            };
+
+            return View(model);
+        }
+
+        //
+        // POST: Home/Search
+        [HttpPost]
+        public async Task<IActionResult> Search(User user2)
+        {
+            User user1 = await _userManager.GetUserAsync(User);
+
+            Dialog dialog = _messenger.CreateDialog(user1, user2);
+            UserDialog user1Dialog = _messenger.CreateUserDialog(user1, dialog, String.Format("{0} {1}", user2.Name, user2.Surname));
+            UserDialog user2Dialog = _messenger.CreateUserDialog(user2, dialog, String.Format("{0} {1}", user1.Name, user1.Surname));
+            _messenger.SaveChanges();
+
+            return View("Dialog", dialog.Id);
         }
 
         //
