@@ -39,11 +39,6 @@ namespace HalushkoMessenger.Managers
             return _context.Users.Single(u => u.Id == userId);
         }
 
-        public User GetUserByUserName(string userName)
-        {
-            return _context.Users.Single(u => u.UserName == userName);
-        }
-
         public IEnumerable<UserDialog> GetAllUserDialogs(string userId)
         {
             return _context.UserDialogs.Where(ud => ud.UserId == userId);

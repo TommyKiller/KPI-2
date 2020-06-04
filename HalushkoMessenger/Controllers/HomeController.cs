@@ -54,6 +54,8 @@ namespace HalushkoMessenger.Controllers
         [HttpPost]
         public IActionResult Dialog(SendMessageViewModel model)
         {
+            throw new NotImplementedException();
+
             return View("Dialog", model.DialogId);
         }
 
