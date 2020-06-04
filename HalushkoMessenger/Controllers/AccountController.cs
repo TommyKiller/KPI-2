@@ -14,6 +14,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
+using HalushkoMessenger.Managers;
 
 namespace HalushkoMessenger.Controllers
 {
@@ -22,7 +23,7 @@ namespace HalushkoMessenger.Controllers
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, ApplicationDbContext context)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;

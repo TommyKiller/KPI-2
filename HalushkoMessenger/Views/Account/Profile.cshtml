@@ -1,4 +1,4 @@
-﻿
+﻿@model HalushkoMessenger.ViewModels.UserProfileViewModel
 @{
     ViewData["Title"] = "Profile";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -12,11 +12,13 @@
                         <img src="/w3images/bandmember.jpg" alt="Avatar">
                     </div>
                     <div class="col-sm-6 col-md-8">
-                        <h4>
-                            Hello @ViewBag.Name @ViewBag.Surname
-                            <br />
-                            User Login: @ViewBag.Login
-                        </h4>
+                        @{
+                            <h4>
+                                Hello model.Name model.Surname
+                                <br />
+                                User Login: model.UserName
+                            </h4>
+                        }
                     </div>
                 </div>
                             <a asp-area="" asp-controller="Account" asp-action="Edit"><input type="submit" class="btn btn-danger" value="Edit profile" style="margin-left: 20px; margin-top: 20px;" /></a>
