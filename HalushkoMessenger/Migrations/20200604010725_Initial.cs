@@ -26,7 +26,6 @@ namespace HalushkoMessenger.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
                     Email = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
@@ -40,11 +39,14 @@ namespace HalushkoMessenger.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    Login = table.Column<string>(maxLength: 100, nullable: true)
+                    UserName = table.Column<string>(maxLength: 256, nullable: false),
+                    Name = table.Column<string>(maxLength: 255, nullable: false),
+                    Surname = table.Column<string>(maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.UniqueConstraint("AK_AspNetUsers_UserName", x => x.UserName);
                 });
 
             migrationBuilder.CreateTable(
@@ -153,6 +155,88 @@ namespace HalushkoMessenger.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Dialogs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    User1Id = table.Column<string>(nullable: false),
+                    User2Id = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Dialogs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Dialogs_AspNetUsers_User1Id",
+                        column: x => x.User1Id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Dialogs_AspNetUsers_User2Id",
+                        column: x => x.User2Id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Messages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DialogId = table.Column<int>(nullable: false),
+                    SenderUserId = table.Column<string>(nullable: false),
+                    RecipientUserId = table.Column<string>(nullable: false),
+                    DateTimeStamp = table.Column<DateTime>(nullable: false),
+                    MessegeText = table.Column<string>(maxLength: 3000, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Messages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Messages_Dialogs_DialogId",
+                        column: x => x.DialogId,
+                        principalTable: "Dialogs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Messages_AspNetUsers_RecipientUserId",
+                        column: x => x.RecipientUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Messages_AspNetUsers_SenderUserId",
+                        column: x => x.SenderUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserDialogs",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(nullable: false),
+                    DialogId = table.Column<int>(nullable: false),
+                    CompanionFullName = table.Column<string>(maxLength: 255, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserDialogs", x => new { x.UserId, x.DialogId });
+                    table.ForeignKey(
+                        name: "FK_UserDialogs_Dialogs_DialogId",
+                        column: x => x.DialogId,
+                        principalTable: "Dialogs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserDialogs_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -191,6 +275,36 @@ namespace HalushkoMessenger.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Dialogs_User1Id",
+                table: "Dialogs",
+                column: "User1Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Dialogs_User2Id",
+                table: "Dialogs",
+                column: "User2Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Messages_DialogId",
+                table: "Messages",
+                column: "DialogId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Messages_RecipientUserId",
+                table: "Messages",
+                column: "RecipientUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Messages_SenderUserId",
+                table: "Messages",
+                column: "SenderUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserDialogs_DialogId",
+                table: "UserDialogs",
+                column: "DialogId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -211,7 +325,16 @@ namespace HalushkoMessenger.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Messages");
+
+            migrationBuilder.DropTable(
+                name: "UserDialogs");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Dialogs");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
