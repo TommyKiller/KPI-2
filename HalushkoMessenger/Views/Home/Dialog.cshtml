@@ -11,27 +11,31 @@
     }
     else
     {
-        <div class="messageBox">
-            <div class="container">
-                <img src="/w3images/bandmember.jpg" alt="Avatar">
-                <p>Hello. How are you today?</p>
-                <span class="time-right">11:00</span>
-            </div>
-
+    <div class="messageBox">
+        @foreach (var message in Model.Messages)
+        {
+            if (message.SenderUser.Name == User.Identity.Name)
+            {
+                <div class="container">
+                    <img src="/w3images/bandmember.jpg" alt="Avatar">
+                    <p>@message.MessegeText</p>
+                    <span class="time-right">@message.DateTimeStamp</span>
+                </div>
+            }
             <div class="container darker">
                 <img src="/w3images/avatar_g2.jpg" alt="Avatar" class="right">
-                <p>Hey! I'm fine. Thanks for asking!</p>
-                <span class="time-left">11:01</span>
+                <p>@message.MessegeText</p>
+                <span class="time-left">@message.DateTimeStamp</span>
             </div>
-
-        </div>
+        }
+    </div>
     }
     <div class="writingBox">
         @using (Html.BeginForm("Dialog", "Home"))
         {
             <div>
 
-                @Html.TextBoxFor(d => d, new { message = Model.Messages, @id = "mainInput" })
+                @Html.TextBoxFor(d => d, new {message = Model.Messages, @id = "mainInput" })
                 <input id="mainInput" type="text" placeholder="..." />
                 <button type="submit" style="font-size:20px; border-radius:10px;"><i class="fa fa-send-o"></i></button>
             </div>
