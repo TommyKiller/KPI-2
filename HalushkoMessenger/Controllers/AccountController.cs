@@ -185,7 +185,6 @@ namespace HalushkoMessenger.Controllers
         //
         // GET: Accout/Profile
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> Profile()
         {
             User user = await _userManager.GetUserAsync(User);
