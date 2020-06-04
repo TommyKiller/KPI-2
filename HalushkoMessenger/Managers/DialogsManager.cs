@@ -75,24 +75,5 @@ namespace HalushkoMessenger.Managers
             return _context.Dialogs.Any(d => (d.User1Id == user1Id && d.User2Id == user2Id) ||
                 d.User1Id == user2Id && d.User2Id == user1Id);
         }
-
-        public void StartDialog(string senderId, string recepientId)
-        {
-            var sender = GetUserById(senderId);
-            var recepient = GetUserById(recepientId);
-
-            var dialog = _context.Dialogs.Add(new Dialog
-            {
-                User1 = sender,
-                User2 = recepient
-            });
-
-            var senderDialog = _context.UserDialogs.Add(new UserDialog
-            {
-                User = sender,
-                Dialog = dialog,
-
-            });
-        }
     }
 }

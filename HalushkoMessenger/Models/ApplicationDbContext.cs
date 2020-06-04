@@ -25,7 +25,7 @@ namespace HalushkoMessenger.Models
             // User
             //
             modelBuilder.Entity<User>()
-                .HasAlternateKey(u => u.UserName);
+                .HasKey(u => u.Id);
             //
             // UserDialog
             //

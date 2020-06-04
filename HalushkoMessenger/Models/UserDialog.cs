@@ -20,10 +20,6 @@ namespace HalushkoMessenger.Models
         [Display(Name = "Companion full name")]
         public string CompanionFullName { get; set; }
 
-        [Required]
-        [StringLength(255)]
-        public string UesrName { get; set; }
-
         [ForeignKey("UserId")]
         public User User { get; set; }
 
