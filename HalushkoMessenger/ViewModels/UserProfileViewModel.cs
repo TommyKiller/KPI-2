@@ -9,7 +9,7 @@ namespace HalushkoMessenger.ViewModels
     public class UserProfileViewModel
     {
         [Required]
-        public string Id { get; set; }
+        public string UserName { get; set; }
 
         [Required]
         public string Name { get; set; }
