@@ -1,0 +1,47 @@
+﻿@model HalushkoMessenger.ViewModels.DialogMessagesViewModel
+
+    <div id="renderBody">
+        <div class="chatBox">
+
+            @if (Model.Messages == null)
+            {
+
+                <div class="empty-dialog">
+                    <p>Please chose some dialog !</p>
+                </div>
+            }
+            else
+            {
+                <div class="messageBox">
+                    @foreach (var message in Model.Messages)
+                    {
+                        if (message.SenderUser.Name == User.Identity.Name)
+                        {
+                            <div class="container">
+                                <img src="/w3images/bandmember.jpg" alt="Avatar">
+                                <p>@message.MessegeText</p>
+                                <span class="time-right">@message.DateTimeStamp</span>
+                            </div>
+                        }
+                        <div class="container darker">
+                            <img src="/w3images/avatar_g2.jpg" alt="Avatar" class="right">
+                            <p>@message.MessegeText</p>
+                            <span class="time-left">@message.DateTimeStamp</span>
+                        </div>
+                    }
+                </div>
+            }
+            <div class="writingBox">
+                @using (Html.BeginForm("Dialog", "Home"))
+                {
+                    <div>
+
+                        @Html.TextBoxFor(d => d.Messages, new { message = Model.Messages, @id = "mainInput" })
+                        <input id="mainInput" type="text" placeholder="..." />
+                        <button type="submit" style="font-size:20px; border-radius:10px;"><i class="fa fa-send-o"></i></button>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
