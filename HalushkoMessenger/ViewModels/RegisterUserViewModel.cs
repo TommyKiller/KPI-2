@@ -11,7 +11,7 @@ namespace HalushkoMessenger.ViewModels
         [Required]
         [StringLength(255)]
         [Display(Name = "User name")]
-        public string Id { get; set; }
+        public string UserName { get; set; }
 
         [Required]
         [StringLength(255)]
