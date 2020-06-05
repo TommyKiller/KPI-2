@@ -15,7 +15,7 @@
                 <div class="messageBox">
                     @foreach (var message in Model.Messages)
                     {
-                        if (message.SenderUser.Name == User.Identity.Name)
+                        if (message.Sender.Name == User.Identity.Name)
                         {
                             <div class="container">
                                 <img src="/w3images/bandmember.jpg" alt="Avatar">

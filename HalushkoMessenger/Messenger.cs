@@ -36,7 +36,12 @@ namespace HalushkoMessenger
 
         public IEnumerable<User> GetAllUsersByUserNameSubstr(string userNameSubstr)
         {
-            return _context.Users.Where(u => u.UserName == userNameSubstr);
+            return _context.Users.Where(u => u.UserName.Contains(userNameSubstr));
+        }
+
+        public Dialog GetDialog(string userId, string companionId)
+        {
+            return _context.UserDialogs.Include(ud => ud.Dialog).Single(ud => ud.UserId == userId && ud.CompanionId == companionId).Dialog;
         }
 
         public IEnumerable<UserDialog> GetAllUserDialogs(string userId)
@@ -51,12 +56,23 @@ namespace HalushkoMessenger
 
         public Dialog CreateDialog(User user1, User user2)
         {
-            return new Dialog();
+            Dialog dialog = new Dialog { User1 = user1, User2 = user2 };
+            _context.Dialogs.Add(dialog);
+
+            return dialog;
         }
 
-        public UserDialog CreateUserDialog(User user, Dialog dialog, string companionFulName)
+        public UserDialog CreateUserDialog(User user, User companion, Dialog dialog)
         {
-            return new UserDialog();
+            UserDialog ud = new UserDialog { User = user, Companion = companion, Dialog = dialog };
+            _context.UserDialogs.Add(ud);
+
+            return ud;
+        }
+
+        public bool DialogExists(string userId, string companionId)
+        {
+            return _context.UserDialogs.Any(ud => ud.UserId == userId && ud.CompanionId == companionId);
         }
 
         public void SaveChanges()

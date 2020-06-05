@@ -16,10 +16,7 @@ namespace HalushkoMessenger.Models
         public int DialogId { get; set; }
 
         [Required]
-        public string SenderUserId { get; set; }
-
-        [Required]
-        public string RecipientUserId { get; set; }
+        public string SenderId { get; set; }
 
         [Required]
         [DataType(DataType.DateTime)]
@@ -32,10 +29,7 @@ namespace HalushkoMessenger.Models
         [ForeignKey("DialogId")]
         public Dialog Dialog { get; set; }
 
-        [ForeignKey("SenderUserId")]
-        public User SenderUser { get; set; }
-
-        [ForeignKey("RecipientUserId")]
-        public User RecipientUser { get; set; }
+        [ForeignKey("SenderId")]
+        public User Sender { get; set; }
     }
 }

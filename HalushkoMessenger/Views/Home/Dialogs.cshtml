@@ -12,7 +12,7 @@
         @foreach (var dialog in Model.UserDialogs)
         {
             <div class="container">
-                @Html.ActionLink(dialog.CompanionFullName, "Dialog", "Home", new { id = dialog.DialogId })
+                @Html.ActionLink(dialog.Companion.UserName, "Dialog", "Home", new { id = dialog.DialogId })
             </div>
         }
 

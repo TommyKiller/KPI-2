@@ -34,7 +34,13 @@ namespace HalushkoMessenger.Models
             modelBuilder.Entity<UserDialog>()
                 .HasOne(ud => ud.User)
                 .WithMany()
-                .HasForeignKey(ud => ud.UserId);
+                .HasForeignKey(ud => ud.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<UserDialog>()
+                .HasOne(ud => ud.Companion)
+                .WithMany()
+                .HasForeignKey(ud => ud.CompanionId)
+                .OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<UserDialog>()
                 .HasOne(ud => ud.Dialog)
                 .WithMany()
@@ -60,15 +66,9 @@ namespace HalushkoMessenger.Models
             modelBuilder.Entity<Message>()
                 .HasKey(m => m.Id);
             modelBuilder.Entity<Message>()
-                .HasOne(m => m.SenderUser)
+                .HasOne(m => m.Sender)
                 .WithMany()
-                .HasForeignKey(m => m.SenderUserId)
-                .OnDelete(DeleteBehavior.NoAction);
-            modelBuilder.Entity<Message>()
-                .HasOne(m => m.RecipientUser)
-                .WithMany()
-                .HasForeignKey(m => m.RecipientUserId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .HasForeignKey(m => m.SenderId);
         }
     }
 }
