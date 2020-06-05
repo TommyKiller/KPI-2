@@ -1,7 +1,7 @@
 ﻿@model HalushkoMessenger.ViewModels.SearchUserViewModel
 
 @{
-    ViewData["Title"] = "PeopleList";
+    ViewData["Title"] = "Search";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -13,7 +13,7 @@
         @foreach (var user in Model.Users)
         {
             <div class="container">
-                @Html.ActionLink(user.Name, "Search", "Home", user)
+                @Html.ActionLink("Search", "Home", user)
             </div>
         }
 
