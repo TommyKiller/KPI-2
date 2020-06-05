@@ -1,27 +1,30 @@
 ﻿@model HalushkoMessenger.ViewModels.UserProfileViewModel
 @using Microsoft.AspNetCore.Identity;
 @using HalushkoMessenger.Models
-    
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-6">
-            <div class="well well-sm">
-                <div class="row">
-                    <div class="col-sm-6 col-md-4">
-                        <img src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png" alt="Avatar" />
+
+@Html.Partial("_Menu")
+
+<div id="renderBody">
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6">
+                <div class="well well-sm">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-4">
+                            <img src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png" alt="Avatar" />
+                        </div>
+                        <div class="col-sm-6 col-md-8">
+                            @{
+                                <h4>
+                                    Hello <span id="Name">@Model.Name</span> <span id="Surname">@Model.Surname</span>
+                                    <br />
+                                    User Login: <span id="userName">@Model.UserName</span>
+                                </h4>
+                            }
+                        </div>
                     </div>
-                    <div class="col-sm-6 col-md-8">
-                        @{
-                            <h4>
-                                Hello <span id="Name">@Model.Name</span> <span id="Surname">@Model.Surname</span>
-                                <br />
-                                User Login: <span id="userName">@Model.UserName</span>
-                            </h4>
-                        }
-                    </div>
+                    <a asp-area="" asp-controller="Account" asp-action="Edit"><input type="submit" class="btn btn-danger" value="Edit profile" /></a>
                 </div>
-                <a asp-area="" asp-controller="Account" asp-action="Edit"><input type="submit" class="btn btn-danger" value="Edit profile" style="margin-left: 20px; margin-top: 20px;" /></a>
             </div>
         </div>
-    </div>
 </div>
