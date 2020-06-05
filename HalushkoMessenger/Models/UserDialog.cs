@@ -13,15 +13,16 @@ namespace HalushkoMessenger.Models
         public string UserId { get; set; }
 
         [Required]
-        public int DialogId { get; set; }
+        public string CompanionId { get; set; }
 
         [Required]
-        [StringLength(255)]
-        [Display(Name = "Companion full name")]
-        public string CompanionFullName { get; set; }
+        public int DialogId { get; set; }
 
         [ForeignKey("UserId")]
         public User User { get; set; }
+        
+        [ForeignKey("CompanionId")]
+        public User Companion { get; set; }
 
         [ForeignKey("DialogId")]
         public Dialog Dialog { get; set; }

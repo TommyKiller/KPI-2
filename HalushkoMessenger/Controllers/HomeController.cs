@@ -57,21 +57,13 @@ namespace HalushkoMessenger.Controllers
         }
 
         //
-        // GET: Home/Search
-        [HttpGet]
-        public IActionResult Search()
-        {
-            return View();
-        }
-
-        //
         // GET: Home/Search/userNameSubstring
         [HttpGet]
         public IActionResult Search(string userNameSubstr)
         {
             SearchUserViewModel model = new SearchUserViewModel
             {
-                Users = _messenger.GetAllUsersByUserNameSubstr(userNameSubstr)
+                Users = userNameSubstr == String.Empty ? _messenger.GetAllUsersByUserNameSubstr(userNameSubstr) : new List<User>()
             };
 
             return View(model);
@@ -83,11 +75,19 @@ namespace HalushkoMessenger.Controllers
         public async Task<IActionResult> Search(User user2)
         {
             User user1 = await _userManager.GetUserAsync(User);
+            Dialog dialog;
 
-            Dialog dialog = _messenger.CreateDialog(user1, user2);
-            UserDialog user1Dialog = _messenger.CreateUserDialog(user1, dialog, String.Format("{0} {1}", user2.Name, user2.Surname));
-            UserDialog user2Dialog = _messenger.CreateUserDialog(user2, dialog, String.Format("{0} {1}", user1.Name, user1.Surname));
-            _messenger.SaveChanges();
+            if (!_messenger.DialogExists(user1.Id, user2.Id))
+            {
+                dialog = _messenger.CreateDialog(user1, user2);
+                _messenger.CreateUserDialog(user1, user2, dialog);
+                _messenger.CreateUserDialog(user2, user2, dialog);
+                _messenger.SaveChanges();
+            }
+            else
+            {
+                dialog = _messenger.GetDialog(user1.Id, user2.Id);
+            }
 
             return View("Dialog", dialog.Id);
         }
