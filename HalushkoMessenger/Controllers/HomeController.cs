@@ -65,7 +65,7 @@ namespace HalushkoMessenger.Controllers
                 Users = userNameSubstr == String.Empty ? _messenger.GetAllUsersByUserNameSubstr(userNameSubstr) : new List<User>()
             };
 
-            return View("Search",model);
+            return View("Search", model);
         }
 
         //
