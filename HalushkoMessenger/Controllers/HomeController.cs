@@ -58,7 +58,6 @@ namespace HalushkoMessenger.Controllers
 
         //
         // GET: Home/Search/userNameSubstring
-        [HttpGet]
         public IActionResult Search(string userNameSubstr)
         {
             SearchUserViewModel model = new SearchUserViewModel
