@@ -74,7 +74,7 @@ namespace HalushkoMessenger.Controllers
                 Users = _messenger.GetAllUsersByUserNameSubstr(userNameSubstr)
             };
 
-            return View(model);
+            return View("Search",model);
         }
 
         //
