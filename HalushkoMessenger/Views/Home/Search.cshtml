@@ -1,0 +1,27 @@
+﻿@model HalushkoMessenger.ViewModels.SearchUserViewModel
+
+@{
+    ViewData["Title"] = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="renderBody">
+    <h1>Our users</h1>
+    <div class="userList">
+        Find user:
+        @using (Html.BeginForm("Search", "Home", FormMethod.Get))
+        {
+            
+                <input type="search" name="q" placeholder="Find curent user">
+                <input type="submit" value="Find">
+            
+        }
+        Chose user to start chating :
+        @foreach (var user in Model.Users)
+        {
+            <div class="container">
+                @Html.ActionLink(user.Name,"Search", "Home", user)
+            </div>
+        }
+    </div>
+</div>

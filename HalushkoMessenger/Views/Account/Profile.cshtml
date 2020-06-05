@@ -1,13 +1,7 @@
 ﻿@model HalushkoMessenger.ViewModels.UserProfileViewModel
 @using Microsoft.AspNetCore.Identity;
 @using HalushkoMessenger.Models
-@inject SignInManager<User> SignInManager
-@inject UserManager<User> UserManager
-
-@{
-    ViewData["Title"] = "Profile";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+    
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-6">
@@ -19,9 +13,9 @@
                     <div class="col-sm-6 col-md-8">
                         @{
                             <h4>
-                                Hello <span id="Name">@UserManager.GetUserName(User)</span> <span id="Surname">@UserManager.GetUserName(User)</span>
+                                Hello <span id="Name">@Model.Name</span> <span id="Surname">@Model.Surname</span>
                                 <br />
-                                User Login: <span id="userName">@Model.Name</span>
+                                User Login: <span id="userName">@Model.UserName</span>
                             </h4>
                         }
                     </div>
