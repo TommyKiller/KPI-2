@@ -34,17 +34,23 @@ namespace HalushkoMessenger
             }
         }
 
-        public IEnumerable<User> GetAllUsersByUserNameSubstr(string userNameSubstr)
+        public User GetUserById(Guid id)
         {
-            return _context.Users.Where(u => u.UserName.Contains(userNameSubstr)).ToList();
+            return _context.Users.Find(id);
         }
 
-        public Dialog GetDialog(string userId, string companionId)
+        public IEnumerable<User> GetAllUsersByUserNameSubstring(string userNameSubstr)
+        {
+            userNameSubstr = userNameSubstr.Normalize();
+            return _context.Users.Where(u => u.NormalizedUserName.Contains(userNameSubstr)).ToList();
+        }
+
+        public Dialog GetDialog(Guid userId, Guid companionId)
         {
             return _context.UserDialogs.Include(ud => ud.Dialog).Single(ud => ud.UserId == userId && ud.CompanionId == companionId).Dialog;
         }
 
-        public IEnumerable<UserDialog> GetAllUserDialogs(string userId)
+        public IEnumerable<UserDialog> GetAllUserDialogs(Guid userId)
         {
             return _context.UserDialogs.Where(ud => ud.UserId == userId);
         }
@@ -70,7 +76,7 @@ namespace HalushkoMessenger
             return ud;
         }
 
-        public bool DialogExists(string userId, string companionId)
+        public bool DialogExists(Guid userId, Guid companionId)
         {
             return _context.UserDialogs.Any(ud => ud.UserId == userId && ud.CompanionId == companionId);
         }

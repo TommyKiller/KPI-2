@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HalushkoMessenger.Models
 {
-    public class ApplicationDbContext : IdentityDbContext<User>
+    public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     {
         public DbSet<Message> Messages { get; set; }
         public DbSet<Dialog> Dialogs { get; set; }
@@ -23,52 +24,40 @@ namespace HalushkoMessenger.Models
             base.OnModelCreating(modelBuilder);
             //
             // User
-            //
-            modelBuilder.Entity<User>()
-                .HasAlternateKey(u => u.UserName);
+            modelBuilder.Entity<User>(u =>
+            {
+                u.HasIndex(u => u.UserName).IsUnique();
+                u.Property(u => u.UserName).HasMaxLength(256);
+                u.Property(u => u.Name).HasMaxLength(256);
+                u.Property(u => u.Surname).HasMaxLength(256);
+            });
             //
             // UserDialog
-            //
-            modelBuilder.Entity<UserDialog>()
-                .HasKey(ud => new { ud.UserId, ud.DialogId });
-            modelBuilder.Entity<UserDialog>()
-                .HasOne(ud => ud.User)
-                .WithMany()
-                .HasForeignKey(ud => ud.UserId)
-                .OnDelete(DeleteBehavior.NoAction);
-            modelBuilder.Entity<UserDialog>()
-                .HasOne(ud => ud.Companion)
-                .WithMany()
-                .HasForeignKey(ud => ud.CompanionId)
-                .OnDelete(DeleteBehavior.NoAction);
-            modelBuilder.Entity<UserDialog>()
-                .HasOne(ud => ud.Dialog)
-                .WithMany()
-                .HasForeignKey(ud => ud.DialogId);
+            modelBuilder.Entity<UserDialog>(ud =>
+            {
+                ud.HasKey(ud => new { ud.UserId, ud.DialogId });
+                ud.HasOne(ud => ud.User).WithMany().HasForeignKey(ud => ud.UserId).OnDelete(DeleteBehavior.NoAction).IsRequired();
+                ud.HasOne(ud => ud.Companion).WithMany().HasForeignKey(ud => ud.CompanionId).OnDelete(DeleteBehavior.NoAction).IsRequired();
+                ud.HasOne(ud => ud.Dialog).WithMany().HasForeignKey(ud => ud.DialogId).OnDelete(DeleteBehavior.NoAction).IsRequired();
+            });
             //
             // Dialog
-            //
-            modelBuilder.Entity<Dialog>()
-                .HasKey(d => d.Id);
-            modelBuilder.Entity<Dialog>()
-                .HasOne(d => d.User1)
-                .WithMany()
-                .HasForeignKey(d => d.User1Id)
-                .OnDelete(DeleteBehavior.NoAction);
-            modelBuilder.Entity<Dialog>()
-                .HasOne(d => d.User2)
-                .WithMany()
-                .HasForeignKey(d => d.User2Id)
-                .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Dialog>(d =>
+            {
+                d.HasKey(d => d.Id);
+                d.HasOne(d => d.User1).WithMany().HasForeignKey(d => d.User1Id).OnDelete(DeleteBehavior.NoAction).IsRequired();
+                d.HasOne(d => d.User2).WithMany().HasForeignKey(d => d.User2Id).OnDelete(DeleteBehavior.NoAction).IsRequired();
+            });
             //
             // Message
-            //
-            modelBuilder.Entity<Message>()
-                .HasKey(m => m.Id);
-            modelBuilder.Entity<Message>()
-                .HasOne(m => m.Sender)
-                .WithMany()
-                .HasForeignKey(m => m.SenderId);
+            modelBuilder.Entity<Message>(m =>
+            {
+                m.HasKey(m => m.Id);
+                m.HasOne(m => m.Sender).WithMany().HasForeignKey(m => m.SenderId).IsRequired();
+                m.HasOne(m => m.Dialog).WithMany().HasForeignKey(m => m.DialogId).IsRequired();
+                m.Property(m => m.MessegeText).HasMaxLength(3000).IsRequired();
+                m.Property(m => m.DateTimeStamp).IsRequired();
+            });
         }
     }
 }

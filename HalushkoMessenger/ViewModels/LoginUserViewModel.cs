@@ -9,7 +9,7 @@ namespace HalushkoMessenger.ViewModels
     public class LoginUserViewModel
     {
         [Required]
-        [StringLength(255)]
+        [StringLength(256)]
         [Display(Name = "User name")]
         public string UserName { get; set; }
 

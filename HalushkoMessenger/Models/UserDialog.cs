@@ -10,10 +10,10 @@ namespace HalushkoMessenger.Models
     public class UserDialog
     {
         [Required]
-        public string UserId { get; set; }
+        public Guid UserId { get; set; }
 
         [Required]
-        public string CompanionId { get; set; }
+        public Guid CompanionId { get; set; }
 
         [Required]
         public int DialogId { get; set; }

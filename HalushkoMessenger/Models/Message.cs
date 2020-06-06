@@ -16,12 +16,13 @@ namespace HalushkoMessenger.Models
         public int DialogId { get; set; }
 
         [Required]
-        public string SenderId { get; set; }
+        public Guid SenderId { get; set; }
 
         [Required]
         [DataType(DataType.DateTime)]
         public DateTime DateTimeStamp { get; set; }
 
+        [Required]
         [StringLength(3000)]
         [DataType(DataType.MultilineText)]
         public string MessegeText { get; set; }

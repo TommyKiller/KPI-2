@@ -25,11 +25,12 @@ namespace HalushkoMessenger.Controllers
         //
         // GET: Home/Dialogs
         [HttpGet]
-        public IActionResult Dialogs()
+        public async Task<IActionResult> Dialogs()
         {
+            User user = await _userManager.GetUserAsync(User);
             UserDialogsViewModel model = new UserDialogsViewModel
             {
-                UserDialogs = _messenger.GetAllUserDialogs(_userManager.GetUserId(User)).ToList()
+                UserDialogs = _messenger.GetAllUserDialogs(user.Id).ToList()
             };
 
             return View(model);
@@ -63,7 +64,7 @@ namespace HalushkoMessenger.Controllers
         {
             SearchUserViewModel model = new SearchUserViewModel
             {
-                Users = userNameSubstr != String.Empty ? _messenger.GetAllUsersByUserNameSubstr(userNameSubstr) : new List<User>()
+                Users = userNameSubstr != String.Empty ? _messenger.GetAllUsersByUserNameSubstring(userNameSubstr) : new List<User>()
             };
 
             return View("Search", model);
@@ -72,21 +73,22 @@ namespace HalushkoMessenger.Controllers
         //
         // POST: Home/Search
         [HttpPost]
-        public async Task<IActionResult> Search(User user2)
+        public async Task<IActionResult> Search(Guid user2Id)
         {
             User user1 = await _userManager.GetUserAsync(User);
+            User user2 = _messenger.GetUserById(user2Id);
             Dialog dialog;
 
-            if (!_messenger.DialogExists(user1.Id, user2.Id))
+            if (!_messenger.DialogExists(user1.Id, user2Id))
             {
                 dialog = _messenger.CreateDialog(user1, user2);
                 _messenger.CreateUserDialog(user1, user2, dialog);
-                _messenger.CreateUserDialog(user2, user2, dialog);
+                _messenger.CreateUserDialog(user2, user1, dialog);
                 _messenger.SaveChanges();
             }
             else
             {
-                dialog = _messenger.GetDialog(user1.Id, user2.Id);
+                dialog = _messenger.GetDialog(user1.Id, user2Id);
             }
 
             return View("Dialog", dialog.Id);

@@ -9,16 +9,16 @@ namespace HalushkoMessenger.ViewModels
     public class RegisterUserViewModel
     {
         [Required]
-        [StringLength(255)]
+        [StringLength(256)]
         [Display(Name = "User name")]
         public string UserName { get; set; }
 
         [Required]
-        [StringLength(255)]
+        [StringLength(256)]
         [Display(Name = "First name")]
         public string Name { get; set; }
 
-        [StringLength(255)]
+        [StringLength(256)]
         [Display(Name = "Surname")]
         public string Surname { get; set; }
 

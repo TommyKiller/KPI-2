@@ -13,10 +13,10 @@ namespace HalushkoMessenger.Models
         public int Id { get; set; }
 
         [Required]
-        public string User1Id { get; set; }
+        public Guid User1Id { get; set; }
 
         [Required]
-        public string User2Id { get; set; }
+        public Guid User2Id { get; set; }
 
         [ForeignKey("User1Id")]
         public User User1 { get; set; }
