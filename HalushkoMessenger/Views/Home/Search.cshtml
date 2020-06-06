@@ -19,16 +19,21 @@
 
         }
         Chose user to start chating :
-        @if (Model.Users != null)
+        @if (Model.Users.Count() != 0)
         {
             @foreach (var user in Model.Users)
             {
                 <div class="container">
-                    @Html.ActionLink(user.Name, "Search", "Home", user)
+                    @Html.ActionLink(user.Name+" "+user.Surname, "Search", "Home", new { user2 = user },FormMethod.Post)
                 </div>
             }
         }
-        else { <div>Не знайдено підходящих користувачів :( </div>}
-        
-    </div>
-</div>
+        else
+        {
+            <div class="container">
+                <div>
+                    Не знайдено підходящих користувачів :(
+                </div>
+            </div>
+        }
+        </div>
