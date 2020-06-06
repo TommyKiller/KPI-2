@@ -59,21 +59,14 @@ namespace HalushkoMessenger.Controllers
         //
         // GET: Home/Search/userNameSubstring
         [HttpGet]
-        public IActionResult Search(string userNameSubstr, SearchUserViewModel startModel)
+        public IActionResult Search(string userNameSubstr)
         {
-            
-            if (startModel != null) 
+            SearchUserViewModel model = new SearchUserViewModel
             {
-                //заходить сюди
-                SearchUserViewModel model = new SearchUserViewModel
-                {
-                    Users = userNameSubstr == String.Empty ? _messenger.GetAllUsersByUserNameSubstr(userNameSubstr) : new List<User>()
-                };
-                //вибираю 0 юзерів
-                //return пустого списку але не null
-                return View("Search", model);
-            }
-            return View("Search", startModel);
+                Users = userNameSubstr != String.Empty ? _messenger.GetAllUsersByUserNameSubstr(userNameSubstr) : new List<User>()
+            };
+
+            return View("Search", model);
         }
 
         //

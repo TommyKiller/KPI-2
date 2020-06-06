@@ -36,7 +36,7 @@ namespace HalushkoMessenger
 
         public IEnumerable<User> GetAllUsersByUserNameSubstr(string userNameSubstr)
         {
-            return _context.Users.Where(u => u.UserName.Contains(userNameSubstr));
+            return _context.Users.Where(u => u.UserName.Contains(userNameSubstr)).ToList();
         }
 
         public Dialog GetDialog(string userId, string companionId)
