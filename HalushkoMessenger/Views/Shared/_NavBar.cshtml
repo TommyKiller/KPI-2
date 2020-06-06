@@ -12,7 +12,7 @@
                 <a asp-area="" asp-controller="Home" asp-action="Dialogs">Hello, <span id="userName">@UserManager.GetUserName(User)</span> !</a>
             </li>
             <li id="home">
-                @Html.ActionLink("Search User", "Search","Home",new {name = "", startEmptyModel = new HalushkoMessenger.ViewModels.SearchUserViewModel() })
+                @Html.ActionLink("Search User", "Search","Home",new {name = ""})
             </li>
             <li id="home">
                 <a asp-area="" asp-controller="Home" asp-action="Dialogs">My Dialogs</a>
