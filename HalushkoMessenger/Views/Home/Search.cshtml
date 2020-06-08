@@ -6,7 +6,6 @@
 }
 
 @Html.Partial("_Menu")
-@Html.Partial("")
 
 <div id="renderBody">
     <h1>Our users</h1>
@@ -25,7 +24,13 @@
             @foreach (var user in Model.Users)
             {
                 <div class="container">
-                    @Ajax.ActionLink(user, "Search", new { user2Id = user.Id }, new AjaxOptions { HttpMethod = "Post" })
+                        @using (Html.BeginForm("Search", "Home", FormMethod.Post))
+                        {
+                            <p>@user.Name</p>
+                            <input type="hidden" name="user2Id" value="@user.Id">
+                            <input type="submit" class="btn btn-danger" value="Create dialog" />
+                        }
+                        @*@Ajax.ActionLink(user, "Search", new { user2Id = user.Id }, new AjaxOptions { HttpMethod = "Post" })*@
                 </div>
             }
         }
@@ -39,11 +44,19 @@
         }
     </div>
 </div>
-@section Scripts
+@*@section Scripts
 {
-    <script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
+    
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+
+
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
-}
+
+    <script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
+
+}*@
