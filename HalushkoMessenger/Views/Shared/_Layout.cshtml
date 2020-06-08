@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿
+@using System.Web.Optimization;
+<!DOCTYPE html>
 <html lang="ua">
 <head>
     <meta charset="utf-8" />
@@ -7,6 +9,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-lumen.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 <body>
     @Html.Partial("_NavBar")
@@ -38,9 +41,16 @@
         <p>Contacts: admin@mysyte.com</p>
         <p>Copyright © MySyte.com, 2042</p>
     </div>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @* тут має пахати ajax *@
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
+    @*@Scripts.Render("~jquery.unobtrusive-ajax.min.js")*@
+
 </body>
 </html>
