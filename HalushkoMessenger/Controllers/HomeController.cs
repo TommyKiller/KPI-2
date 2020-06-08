@@ -60,7 +60,7 @@ namespace HalushkoMessenger.Controllers
                 Messages = _messenger.GetAllDialogMessages(dialogId)
             };
 
-            return View("Dialog",model);
+            return View(model);
         }
 
         //
@@ -110,7 +110,7 @@ namespace HalushkoMessenger.Controllers
                 dialog = _messenger.GetDialogByUsers(user1.Id, user2Id);
             }
 
-            return View(dialog.Id);
+            return RedirectToAction("Dialog", "Home", dialog.Id);
         }
 
         //
