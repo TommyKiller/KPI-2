@@ -22,6 +22,15 @@ namespace HalushkoMessenger.Controllers
             _messenger = messenger;
         }
 
+        public IActionResult Index()
+        {
+            return View();
+        }
+        public IActionResult About()
+        {
+            return View();
+        }
+
         //
         // GET: Home/Dialogs
         [HttpGet]
