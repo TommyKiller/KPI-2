@@ -1,7 +1,7 @@
 ﻿@model HalushkoMessenger.ViewModels.DialogMessagesViewModel
 
     <div id="renderBody">
-        <h1>Chat with user @Model.Messages</h1>
+        <h1>Your chat with <span class="important">@Model.Messages.First(m => m.DialogId == Model.DialogId).Sender.Name</span></h1>
         <div class="chatBox">
 
             @if (Model.Messages == null)
@@ -16,16 +16,16 @@
                 <div class="messageBox">
                     @foreach (var message in Model.Messages)
                     {
-                        if (message.Sender.Name == User.Identity.Name)
+                        if (message.Sender.UserName == User.Identity.Name)
                         {
-                            <div class="container">
-                                <img src="/w3images/bandmember.jpg" alt="Avatar">
+                            <div class="container whiter">
+                                <img src="~/lib/userAvatar.png" alt="Avatar">
                                 <p>@message.MessegeText</p>
                                 <span class="time-right">@message.DateTimeStamp</span>
                             </div>
                         }
                         <div class="container darker">
-                            <img src="/w3images/avatar_g2.jpg" alt="Avatar" class="right">
+                            <img src="~/lib/userAvatar2.png" alt="Avatar" class="right">
                             <p>@message.MessegeText</p>
                             <span class="time-left">@message.DateTimeStamp</span>
                            

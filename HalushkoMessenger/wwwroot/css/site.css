@@ -399,12 +399,13 @@ hr {
     padding: 10px;
     margin-top: 15px 
 }
-
+.whiter {
+    text-align: left;
+}
 /* Darker chat container */
 .darker {
     border-color: #ccc;
     background-color: #ddd;
-
     text-align:right;
 }
 
@@ -418,7 +419,7 @@ hr {
 /* Style images */
 .container img {
     float: left;
-    max-width: 60px;
+    max-width: 40px;
     width: 100%;
     margin-right: 20px;
     border-radius: 50%;
@@ -435,10 +436,17 @@ hr {
 .time-right {
     float: right;
     color: #aaa;
+    font-size:80% ;
 }
 
 /* Style time text */
 .time-left {
     float: left;
     color: #999;
+    font-size: 80%;
+}
+
+.important {
+    font-style:italic;
+    font-weight:bold;
 }
