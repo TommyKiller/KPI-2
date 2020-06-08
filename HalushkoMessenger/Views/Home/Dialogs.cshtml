@@ -14,7 +14,7 @@
             <div class="container">
                
                 @Model.UserDialogs.Count
-                @Html.ActionLink(dialog.Companion.UserName, "Dialog", "Home", new { id = dialog.DialogId })
+                @Html.ActionLink(dialog.Companion.UserName, "Dialog", "Home", new { dialogId = dialog.DialogId })
             </div>
         }
 

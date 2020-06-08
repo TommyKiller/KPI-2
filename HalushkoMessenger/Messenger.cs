@@ -62,7 +62,7 @@ namespace HalushkoMessenger
 
         public List<Message> GetAllDialogMessages(int dialogId)
         {
-            return _context.Messages.Where(m => m.DialogId == dialogId).ToList();
+            return _context.Messages.Include(m => m.Sender).Where(m => m.DialogId == dialogId).ToList();
         }
 
         public Message SendMessage(Dialog dialog, User sender, string text)

@@ -62,12 +62,13 @@ namespace HalushkoMessenger.Controllers
         //
         // POST: Home/Dialog/dialogID
         [HttpPost]
-        public async Task<IActionResult> Dialog(SendMessageViewModel model)
+        public async Task<IActionResult> Dialog(int dialogId, string messageText)
         {
-            Dialog dialog = _messenger.GetDialogById(model.DialogId);
+            Dialog dialog = _messenger.GetDialogById(dialogId);
             User user = await _userManager.GetUserAsync(User);
 
-            _messenger.SendMessage(dialog, user, model.MessegeText);
+            _messenger.SendMessage(dialog, user, messageText);
+            _messenger.SaveChanges();
 
             return RedirectToAction("Dialog", dialog.Id);
         }
@@ -106,7 +107,7 @@ namespace HalushkoMessenger.Controllers
                 dialog = _messenger.GetDialogByUsers(user1.Id, user2Id);
             }
 
-            return RedirectToAction("Dialog", "Home", dialog.Id);
+            return RedirectToAction("Dialog", dialog.Id);
         }
 
         //
