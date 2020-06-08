@@ -13,25 +13,29 @@
             }
             else
             {
-                <div class="messageBox">
-                    @foreach (var message in Model.Messages)
+        <div class="messageBox">
+                @foreach (var message in Model.Messages)
+                {
+                    if (message.Sender.UserName == User.Identity.Name)
                     {
-                        if (message.Sender.UserName == User.Identity.Name)
-                        {
-                            <div class="container whiter">
-                                <img src="~/lib/userAvatar.png" alt="Avatar">
-                                <p>@message.MessegeText</p>
-                                <span class="time-right">@message.DateTimeStamp</span>
-                            </div>
-                        }
-                        <div class="container darker">
-                            <img src="~/lib/userAvatar2.png" alt="Avatar" class="right">
+                        <div class="container whiter">
+                            <img src="~/userAvatar.png" alt="Avatar">
                             <p>@message.MessegeText</p>
-                            <span class="time-left">@message.DateTimeStamp</span>
-                           
+                            <span class="time-right">@message.DateTimeStamp</span>
                         </div>
                     }
-                </div>
+                    else
+                    {
+                        <div class="container darker">
+                            <img src="~/userAvatar2.png" alt="Avatar" class="right">
+                            <p>@message.MessegeText</p>
+                            <span class="time-left">@message.DateTimeStamp</span>
+
+                        </div>
+                    }
+
+                }
+        </div>
             }
             <div class="writingBox">
                 @using (Html.BeginForm("Dialog", "Home"))
