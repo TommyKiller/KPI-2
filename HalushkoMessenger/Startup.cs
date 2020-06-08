@@ -34,9 +34,8 @@ namespace HalushkoMessenger
 
             services.AddTransient<Messenger>();
 
-            services.AddDefaultIdentity<User>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
+            services.AddIdentity<User, IdentityRole<Guid>>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>

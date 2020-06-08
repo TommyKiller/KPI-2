@@ -33,6 +33,11 @@ namespace HalushkoMessenger.Controllers
                 UserDialogs = _messenger.GetAllUserDialogs(user.Id).ToList()
             };
 
+            //UserDialogsViewModel model = new UserDialogsViewModel
+            //{
+            //    UserDialogs = new List<UserDialog>()
+            //};
+
             return View(model);
         }
 

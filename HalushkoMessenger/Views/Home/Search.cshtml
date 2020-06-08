@@ -25,7 +25,7 @@
             @foreach (var user in Model.Users)
             {
                 <div class="container">
-                    @Ajax.ActionLink(user, "Search", new { user2Id = user.Id }, new AjaxOptions { HttpMethod = "Post" })
+                    @*Ajax.ActionLink(user, "Search", new { user2Id = user.Id }, new AjaxOptions { HttpMethod = "Post" })*@
                 </div>
             }
         }
