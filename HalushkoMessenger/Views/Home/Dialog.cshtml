@@ -13,38 +13,46 @@
             }
             else
             {
-        <div class="messageBox">
-                @foreach (var message in Model.Messages)
-                {
-                    if (message.Sender.UserName == User.Identity.Name)
+                <div class="messageBox">
+                    @if (Model.Messages.Count != 0)
                     {
-                        <div class="container whiter">
-                            <p class="userName">@message.Sender.UserName</p>
-                            <img src="~/userAvatar.png" alt="Avatar">
-                            <p>@message.MessegeText</p>
-                            <span class="time-right">@message.DateTimeStamp</span>
-                        </div>
+                        @foreach (var message in Model.Messages)
+                        {
+                            if (message.Sender.UserName == User.Identity.Name)
+                            {
+                                <div class="container whiter">
+                                    <p class="userName">@message.Sender.UserName</p>
+                                    <img src="~/userAvatar.png" alt="Avatar">
+                                    <p>@message.MessegeText</p>
+                                    <span class="time-right">@message.DateTimeStamp</span>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="container darker">
+                                    <p class="userName">@message.Sender.UserName</p>
+                                    <img src="~/userAvatar2.png" alt="Avatar" class="right">
+                                    <p>@message.MessegeText</p>
+                                    <span class="time-left">@message.DateTimeStamp</span>
+
+                                </div>
+                            }
+                        }
                     }
                     else
                     {
-                        <div class="container darker">
-                            <p class="userName">@message.Sender.UserName</p>
-                            <img src="~/userAvatar2.png" alt="Avatar" class="right">
-                            <p>@message.MessegeText</p>
-                            <span class="time-left">@message.DateTimeStamp</span>
-
+                        <div>
+                            No message yet...
                         </div>
                     }
-
-                }
-        </div>
+                </div>
             }
             <div class="writingBox">
                 @using (Html.BeginForm("Dialog", "Home"))
                 {
                     <div>
                         <input type="hidden" name="dialogId" value="@Model.DialogId">
-                        <input id="mainInput" name="messageText" type="text" placeholder="..." autocomplete="off"/>
+                        <input id="mainInput" name="messageText" type="text" placeholder="..." autocomplete="off" />
                         <button type="submit" style="font-size:20px; border-radius:10px;"><i class="fa fa-send-o"></i></button>
                     </div>
                 }
