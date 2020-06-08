@@ -361,12 +361,11 @@ hr {
     background: linear-gradient(to right,#57c1eb 0%,#246fa8 100%);
     border: 2px solid black;
     border-radius: 10px;
-    width:780px;
+    width:100%;
     float: left;
     height: 650px;
     overflow: auto scroll;
     padding: 5px;
-    margin:10px;
 }
 .chatBox {
     background: linear-gradient(to right,#57c1eb 0%,#246fa8 100%);
