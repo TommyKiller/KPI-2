@@ -70,7 +70,7 @@ namespace HalushkoMessenger.Controllers
             _messenger.SendMessage(dialog, user, messageText);
             _messenger.SaveChanges();
 
-            return RedirectToAction("Dialog", dialog.Id);
+            return RedirectToAction("Dialog", new { dialogId = dialog.Id });
         }
 
         //
@@ -107,7 +107,7 @@ namespace HalushkoMessenger.Controllers
                 dialog = _messenger.GetDialogByUsers(user1.Id, user2Id);
             }
 
-            return RedirectToAction("Dialog", dialog.Id);
+            return RedirectToAction("Dialog", new { dialogId = dialog.Id });
         }
 
         //
