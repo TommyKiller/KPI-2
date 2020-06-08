@@ -370,7 +370,6 @@ hr {
 }
 .chatBox {
     background: linear-gradient(to right,#57c1eb 0%,#246fa8 100%);
-    margin-left: 210px;
     height: 650px;
     border: 2px solid black;
     border-radius: 10px;
