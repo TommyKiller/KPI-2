@@ -12,6 +12,7 @@
         @foreach (var dialog in Model.UserDialogs)
         {
             <div class="container">
+               
                 @Model.UserDialogs.Count
                 @Html.ActionLink(dialog.Companion.UserName, "Dialog", "Home", new { id = dialog.DialogId })
             </div>

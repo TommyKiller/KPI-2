@@ -37,8 +37,8 @@
                 @using (Html.BeginForm("Dialog", "Home"))
                 {
                     <div>
-                        @Html.TextBoxFor(d => d.Messages, new { message = Model.Messages, @id = "mainInput" })
-                        <input id="mainInput" type="text" placeholder="..." />
+                        <input type="hidden" name="dialogId" value="@Model.DialogId">
+                        <input id="mainInput" name="messageText" type="text" placeholder="..." />
                         <button type="submit" style="font-size:20px; border-radius:10px;"><i class="fa fa-send-o"></i></button>
                     </div>
                 }
