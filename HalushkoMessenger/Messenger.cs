@@ -45,7 +45,12 @@ namespace HalushkoMessenger
             return _context.Users.Where(u => u.NormalizedUserName.Contains(userNameSubstr)).ToList();
         }
 
-        public Dialog GetDialog(Guid userId, Guid companionId)
+        public Dialog GetDialogById(int dialogId)
+        {
+            return _context.Dialogs.Find(dialogId);
+        }
+
+        public Dialog GetDialogByUsers(Guid userId, Guid companionId)
         {
             return _context.UserDialogs.Include(ud => ud.Dialog).Single(ud => ud.UserId == userId && ud.CompanionId == companionId).Dialog;
         }
@@ -58,6 +63,20 @@ namespace HalushkoMessenger
         public List<Message> GetAllDialogMessages(int dialogId)
         {
             return _context.Messages.Where(m => m.DialogId == dialogId).ToList();
+        }
+
+        public Message SendMessage(Dialog dialog, User sender, string text)
+        {
+            Message message = new Message
+            {
+                Dialog = dialog,
+                Sender = sender,
+                DateTimeStamp = DateTime.Now,
+                MessegeText = text
+            };
+            _context.Messages.Add(message);
+
+            return message;
         }
 
         public Dialog CreateDialog(User user1, User user2)

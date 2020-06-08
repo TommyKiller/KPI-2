@@ -6,6 +6,7 @@
 }
 
 @Html.Partial("_Menu")
+@Html.Partial("")
 
 <div id="renderBody">
     <h1>Our users</h1>
@@ -24,11 +25,7 @@
             @foreach (var user in Model.Users)
             {
                 <div class="container">
-                    @using (Html.BeginForm("Search", "Home", FormMethod.Post))
-                    { 
-                        <input type="hidden" name="user2" value="@user" />
-                        <input type="submit" class="btn btn-danger" value="Start chating" />
-                    }
+                    @Ajax.ActionLink(user, "Search", new { user2Id = user.Id }, new AjaxOptions { HttpMethod = "Post" })
                 </div>
             }
         }

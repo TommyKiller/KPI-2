@@ -11,12 +11,6 @@ namespace HalushkoMessenger.ViewModels
         [Required]
         public int DialogId { get; set; }
 
-        [Required]
-        public string SenderUserId { get; set; }
-
-        [Required]
-        public string RecipientUserId { get; set; }
-
         [StringLength(3000)]
         [DataType(DataType.MultilineText)]
         public string MessegeText { get; set; }

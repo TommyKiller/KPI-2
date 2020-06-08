@@ -52,9 +52,14 @@ namespace HalushkoMessenger.Controllers
         //
         // POST: Home/Dialog/dialogID
         [HttpPost]
-        public IActionResult Dialog(SendMessageViewModel model)
+        public async Task<IActionResult> Dialog(SendMessageViewModel model)
         {
-            throw new NotImplementedException();
+            Dialog dialog = _messenger.GetDialogById(model.DialogId);
+            User user = await _userManager.GetUserAsync(User);
+
+            _messenger.SendMessage(dialog, user, model.MessegeText);
+
+            return RedirectToAction("Dialog", dialog.Id);
         }
 
         //
@@ -88,7 +93,7 @@ namespace HalushkoMessenger.Controllers
             }
             else
             {
-                dialog = _messenger.GetDialog(user1.Id, user2Id);
+                dialog = _messenger.GetDialogByUsers(user1.Id, user2Id);
             }
 
             return View("Dialog", dialog.Id);
