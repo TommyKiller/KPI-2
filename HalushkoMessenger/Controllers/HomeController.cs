@@ -52,6 +52,7 @@ namespace HalushkoMessenger.Controllers
         {
             DialogMessagesViewModel model = new DialogMessagesViewModel
             {
+                DialogId = dialogId,
                 Messages = _messenger.GetAllDialogMessages(dialogId)
             };
 

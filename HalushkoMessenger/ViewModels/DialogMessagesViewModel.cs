@@ -8,6 +8,8 @@ namespace HalushkoMessenger.ViewModels
 {
     public class DialogMessagesViewModel
     {
+        public int DialogId { get; set; }
+
         public List<Message> Messages { get; set; }
     }
 }
