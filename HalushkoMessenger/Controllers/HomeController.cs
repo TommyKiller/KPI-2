@@ -110,7 +110,7 @@ namespace HalushkoMessenger.Controllers
                 dialog = _messenger.GetDialogByUsers(user1.Id, user2Id);
             }
 
-            return View("Dialog", dialog.Id);
+            return RedirectToAction("Dialog", "Home", dialog.Id);
         }
 
         //

@@ -57,7 +57,7 @@ namespace HalushkoMessenger
 
         public IEnumerable<UserDialog> GetAllUserDialogs(Guid userId)
         {
-            return _context.UserDialogs.Where(ud => ud.UserId == userId);
+            return _context.UserDialogs.Include(ud => ud.Companion).Where(ud => ud.UserId == userId);
         }
 
         public List<Message> GetAllDialogMessages(int dialogId)
