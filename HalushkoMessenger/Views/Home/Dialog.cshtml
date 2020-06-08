@@ -1,7 +1,7 @@
 ﻿@model HalushkoMessenger.ViewModels.DialogMessagesViewModel
 
     <div id="renderBody">
-        <h1>Your chat with <span class="important">@Model.Messages.First(m => m.DialogId == Model.DialogId).Sender.Name</span></h1>
+        @*<h1>Your chat with <span class="important">@Model.Messages.First(m => m.DialogId == Model.DialogId).Sender.Name</span></h1>*@
         <div class="chatBox">
 
             @if (Model.Messages == null)
