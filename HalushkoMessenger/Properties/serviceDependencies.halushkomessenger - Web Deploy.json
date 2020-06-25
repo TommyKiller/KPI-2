@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroup')]/providers/Microsoft.Sql/servers/halushkomessengerserver/databases/HalushkoMessengerDb",
+      "type": "mssql.azure",
+      "connectionId": "Default",
+      "secretStore": "AzureAppSettings"
+    }
+  }
+}

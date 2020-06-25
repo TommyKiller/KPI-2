@@ -194,5 +194,5 @@ namespace HalushkoMessenger.Controllers
 
             return View(model);
         }
-}
+    }
 }
